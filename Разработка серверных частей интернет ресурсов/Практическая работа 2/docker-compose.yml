@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  web:
+    build: .
+    container_name: my-apache-server
+    ports:
+      - "8080:80"
+    volumes:
+      - ./html:/var/www/html/
+    restart: always
+
+  web2:
+    build: .
+    container_name: my-apache-server-2
+    ports:
+      - "8081:80"
+    volumes:
+      - ./html2:/var/www/html/
+    restart: always
+
+  web3:
+    build: .
+    container_name: my-apache-server-3
+    ports:
+      - "8082:80"
+    volumes:
+      - ./html3:/var/www/html/
+    restart: always  
