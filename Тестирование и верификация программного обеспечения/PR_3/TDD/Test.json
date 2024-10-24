@@ -1,0 +1,52 @@
+﻿[
+  {
+    "question": "Какой язык используется для разработки под платформу .NET?",
+    "answers": ["Java", "C#", "Python", "JavaScript"],
+    "correctAnswerIndex": 1
+  },
+  {
+    "question": "Как называется процесс преобразования объекта в поток байтов?",
+    "answers": ["Десериализация", "Сериализация", "Конвертация", "Инкапсуляция"],
+    "correctAnswerIndex": 1
+  },
+  {
+    "question": "Какой из этих операторов используется для сравнения значений в C#?",
+    "answers": ["=", "==", "===", "!="],
+    "correctAnswerIndex": 1
+  },
+  {
+    "question": "Какое ключевое слово используется для создания экземпляра объекта в C#?",
+    "answers": ["new", "create", "make", "instance"],
+    "correctAnswerIndex": 0
+  },
+  {
+    "question": "Как называется структура данных, которая работает по принципу LIFO (Last In First Out)?",
+    "answers": ["Очередь", "Стек", "Массив", "Список"],
+    "correctAnswerIndex": 1
+  },
+  {
+    "question": "Какой из этих методов не является методом класса Console в C#?",
+    "answers": ["Write", "Read", "Print", "WriteLine"],
+    "correctAnswerIndex": 2
+  },
+  {
+    "question": "Какое из этих ключевых слов используется для обработки исключений в C#?",
+    "answers": ["catch", "throw", "error", "exception"],
+    "correctAnswerIndex": 0
+  },
+  {
+    "question": "Какой тип данных используется для хранения целых чисел в C#?",
+    "answers": ["int", "float", "string", "bool"],
+    "correctAnswerIndex": 0
+  },
+  {
+    "question": "Какое ключевое слово используется для наследования класса в C#?",
+    "answers": ["inherits", "extends", "base", "using"],
+    "correctAnswerIndex": 1
+  },
+  {
+    "question": "Как называется метод, который вызывается при создании объекта в классе?",
+    "answers": ["Деструктор", "Метод", "Конструктор", "Функция"],
+    "correctAnswerIndex": 2
+  }
+]

@@ -1,0 +1,12 @@
+﻿[
+  {
+    "question": "Какой язык используется для разработки под платформу .NET?",
+    "answers": ["Java", "C#", "Python", "JavaScript"],
+    "correctAnswerIndex": 1
+  },
+  {
+    "question": "Какой из этих методов используется для сериализации объектов?",
+    "answers": ["Serialize", "ToString", "Convert", "JsonConvert"],
+    "correctAnswerIndex": 3
+  }
+]
