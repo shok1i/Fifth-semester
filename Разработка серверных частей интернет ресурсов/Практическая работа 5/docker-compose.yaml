@@ -1,0 +1,44 @@
+version: '3.8'
+
+services:
+  apache:
+    build: .
+    container_name: apache
+    ports:
+      - "8080:80"
+    volumes:
+      - ./apache:/var/www/html
+    restart: always
+    environment:
+      - PHP_SESSION_SAVE_HANDLER=redis
+      - PHP_SESSION_SAVE_PATH=redis:6379
+    depends_on:
+      - redis
+
+  db:
+    image: mysql:latest
+    volumes:
+      - ./apache/init.sql:/docker-entrypoint-initdb.d/init.sql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+    ports:
+      - "3307:3306"
+  nginx:
+    image: nginx:latest
+    restart: always
+    ports:
+      - "80:80"
+    volumes: ['./nginx/nginx.conf:/etc/nginx/conf.d/default.conf:ro',
+              './nginx/index1.html:/etc/nginx/html/index1.html:ro',
+              './nginx/index2.html:/etc/nginx/html/index2.html:ro',
+              './nginx/api:/etc/nginx/html/api']
+
+  redis:
+    image: redis:latest
+    container_name: redis
+    restart: always
+    ports:
+      - "6379:6379"
+    volumes:
+      - ./redis:/data
