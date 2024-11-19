@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("MDD")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7a793a6a34787777f9cc054a4f0974e6e479a40e")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6ba3b627e3e2bdf6bbb35ad24171ef0a21bf1dde")]
 [assembly: System.Reflection.AssemblyProductAttribute("MDD")]
 [assembly: System.Reflection.AssemblyTitleAttribute("MDD")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

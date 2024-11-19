@@ -7,7 +7,7 @@ public class GameQuestionsSteps
 {
     private Parser parser;
     private int loadedQuestionsCount;
-    private static string path = "C:\\Users\\shilo\\Documents\\Fifth-semester\\Тестирование и верификация программного обеспечения\\Практика 3\\Практика 3 Tests\\Test.json";
+    private static string path = "C:\\Users\\shilo\\Documents\\Fifth-semester\\Тестирование и верификация программного обеспечения\\PR_3\\TDD\\Test.json";
 
     [Given(@"существует JSON файл с вопросами")]
     public void GivenExistsJsonFileWithQuestions()

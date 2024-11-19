@@ -4,7 +4,7 @@ using PR_3; // Подключите пространство имен вашег
 [TestFixture]
 public class TDDClass
 {
-    private static string path = "C:\\Users\\shilo\\Documents\\Fifth-semester\\Тестирование и верификация программного обеспечения\\Практика 3\\Практика 3 Tests\\Test.json";
+    private static string path = "C:\\Users\\shilo\\Documents\\Fifth-semester\\Тестирование и верификация программного обеспечения\\PR_3\\TDD\\Test.json";
     private Parser parser;
 
     [SetUp]
