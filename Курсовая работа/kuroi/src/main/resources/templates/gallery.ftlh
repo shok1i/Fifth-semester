@@ -20,36 +20,34 @@
 </#if>
 
 <h4>Коффе в ресторане</h4>
-<form action="/" method="get">
+<form action="/gallery" method="get">
     Поиск по названию: <input type="text" name="title"/>
     <input type="submit" value="Поиск"/>
 </form>
 
-<#list products as product>
+<#list coffee_arts as art>
     <div>
-        <img src="/images/${product.previewImageId}">
-        <p><b>${product.title}</b> ${product.price} | <a href="/product/${product.id}">Подробнее...</a></p>
+        <img src="/images/${art.image.id}" width="64" alt="${art.title}">
+        <p>
+            <b>${art.title}</b>
+            <#list art.tagTESTS as tag>
+                ${tag}<#sep>,
+            </#list>
+            <br>
+            <a href="/${art.user.name}/${art.id}">Подробнее...</a>
+        </p>
     </div>
 <#else>
     <h3>Товаров нет</h3>
 </#list>
 
 <#if user.email??>
-    <h3>Создать новый товар</h3>
-    <form action="/product/create" method="post" enctype="multipart/form-data">
-        Название товара: <input type="text" name="title"/>
+    <h3>Создать новый арт</h3>
+    <form action="/addart" method="post" enctype="multipart/form-data">
+        Название арта: <input type="text" name="title"/>
         <br>
-        Описание товара: <input type="text" name="description"/>
+        Фото первое: <input type="file" name="file"/>
         <br>
-        Цена товара: <input type="text" name="price"/>
-        <br>
-        Фото первое: <input type="file" name="file1"/>
-        <br>
-        Фото второе: <input type="file" name="file2"/>
-        <br>
-        Фото третье: <input type="file" name="file3"/>
-        <br>
-
         <input type="hidden" name="_csrf" value="${_csrf.token}"/>
         <input type="submit" value="Добавить товар"/>
     </form>
