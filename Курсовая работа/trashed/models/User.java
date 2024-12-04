@@ -2,65 +2,55 @@ package com.cursework.kuroi.models;
 
 import com.cursework.kuroi.models.enums.Role;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import javax.xml.stream.events.Comment;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.*;
 
-
-@Data
 @Entity
-@NoArgsConstructor
-@AllArgsConstructor
 @Table(name = "users")
+@Data
 public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
 
-    private String userName;
+    @Column(name = "email", unique = true)
+    private String email;
 
-    @Column(unique = true)
-    private String userNickName;
+    @Column(name = "name")
+    private String name;
 
-    @Column(unique = true)
-    private String userEmail;
-
-    private String password;
-
+    @Column(name = "active")
     private boolean active;
 
-    private LocalDate createAt;
+    @Column(name = "password", length = 1024)
+    private String password;
 
     @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
     @CollectionTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"))
     @Enumerated(EnumType.STRING)
     private Set<Role> roles = new HashSet<>();
 
-    @OneToOne(cascade = CascadeType.ALL)
-    private Image image;
+    private LocalDateTime createdAt;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    private List<Art> arts = new ArrayList<>();
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "user")
+    private List<Product> products = new ArrayList<>();
 
-    @OneToMany(cascade = CascadeType.ALL)
-    private List<Likes> likes = new ArrayList<>();
+    @OneToOne (cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn (name = "image_id")
+    private Image avatar;
 
-    // Производим инициализацию
     @PrePersist
-    private void init() {
-        createAt = LocalDate.now();
-        if (userName == null) userName = "id" + id;
-        if (userNickName == null) userNickName = "id" + id;
+    private void init () {
+        createdAt = LocalDateTime.now();
     }
 
-    // Методы SpringSecurity
-    public boolean isAdmin() {
+    // Spring Security
+    public boolean isAdmin () {
         return roles.contains(Role.ROLE_ADMIN);
     }
 
@@ -71,7 +61,7 @@ public class User implements UserDetails {
 
     @Override
     public String getUsername() {
-        return userName;
+        return email;
     }
 
     @Override

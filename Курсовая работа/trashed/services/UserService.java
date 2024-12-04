@@ -3,35 +3,35 @@ package com.cursework.kuroi.services;
 import com.cursework.kuroi.models.User;
 import com.cursework.kuroi.models.enums.Role;
 import com.cursework.kuroi.repositories.UserRepository;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PostMapping;
 
-import java.security.Principal;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-@Slf4j
 @Service
-@AllArgsConstructor
+@Slf4j
+@RequiredArgsConstructor
 public class UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 
-    public boolean addUser(User user) {
-        String email = user.getUserEmail();
-        if (userRepository.findByUserEmail(email) != null) return false;
-
-        // Натсройка пользовотеля по умолчанию
+    public boolean createUser(User user) {
+        String email = user.getEmail();
+        if (userRepository.findByEmail(email) != null) return false;
         user.setActive(true);
         user.getRoles().add(Role.ROLE_USER);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
 
         userRepository.save(user);
+        log.info("User created with email: {}", email);
+
         return true;
     }
 
@@ -39,8 +39,9 @@ public class UserService {
         return userRepository.findAll();
     }
 
-    public void changeUserBanStatus (Long id) {
-        User user = userRepository.findById(id).orElse(null);
+    @PostMapping("/user/ban/{id}")
+    public void banUser(Long id) {
+        User user = userRepository.findById(Math.toIntExact(id)).orElse(null);
         if (user != null) {
             if (user.isActive()) {
                 user.setActive(false);
@@ -50,23 +51,18 @@ public class UserService {
                 user.setActive(true);
                 log.info("User unbanned with id: {}", id);
             }
-            userRepository.save(user);
-        }
-    }
-
-    public void changeUserRoles (User user, Map<String, String> form) {
-        Set<String> roles = Arrays.stream(Role.values()).map(Enum::name).collect(Collectors.toSet());
-        user.getRoles().clear();
-        for (String role : form.keySet()) {
-            if (roles.contains(role)) {
-                user.getRoles().add(Role.valueOf(role));
-            }
         }
         userRepository.save(user);
     }
 
-    public User getUSerByPrinciple(Principal principal) {
-        if (principal == null) return new User();
-        return userRepository.findByUserEmail(principal.getName());
+    public void changeUserRoles(User user, Map<String, String> form) {
+        Set<String> roles = Arrays.stream(Role.values()).map(Enum::name).collect(Collectors.toSet());
+        user.getRoles().clear();
+        for (String key : form.keySet()) {
+            if (roles.contains(key)) {
+                user.getRoles().add(Role.valueOf(key));
+            }
+        }
+        userRepository.save(user);
     }
 }

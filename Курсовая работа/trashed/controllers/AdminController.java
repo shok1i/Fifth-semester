@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.security.Principal;
 import java.util.Map;
 
 @Controller
@@ -21,32 +20,28 @@ import java.util.Map;
 public class AdminController {
     private final UserService userService;
 
-    // Обработка GET-запросов
     @GetMapping("/admin")
-    public String adminPage(Model model, Principal principal) {
+    public String admin(Model model) {
         model.addAttribute("users", userService.getAllUsers());
-        model.addAttribute("currentUser", userService.getUSerByPrinciple(principal));
         return "admin";
     }
 
-    @GetMapping("/admin/edit/{user}")
-    public String changeUserRoles(@PathVariable("user") User user, Model model, Principal principal) {
+    @PostMapping("/admin/user/ban/{id}")
+    public String userBan(@PathVariable("id") Long id) {
+        userService.banUser(id);
+        return "redirect:/admin";
+    }
+
+    @GetMapping("/admin/user/edit/{user}")
+    public String userEdit(@PathVariable("user") User user, Model model) {
         model.addAttribute("user", user);
-        model.addAttribute("currentUser", userService.getUSerByPrinciple(principal));
         model.addAttribute("roles", Role.values());
-        return "user-change-roles";
+        return "user-edit";
     }
 
-    // Обработка POST-запросов
-    @PostMapping("/admin/edit")
-    public String changeUserRoles(@RequestParam("user") User user, @RequestParam Map<String, String> form) {
+    @PostMapping("/admin/user/edit")
+    public String userEdit(@RequestParam("userId") User user, @RequestParam Map<String, String> form) {
         userService.changeUserRoles(user, form);
-        return "redirect:/admin" + user.getId();
-    }
-
-    @PostMapping("/admin/ban")
-    public String banUser(@RequestParam("id") Long id){
-        userService.changeUserBanStatus(id);
         return "redirect:/admin";
     }
 }
