@@ -8,7 +8,6 @@ import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import javax.xml.stream.events.Comment;
 import java.time.LocalDate;
 import java.util.*;
 
@@ -23,7 +22,7 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String userName;
+    private String userBIO;
 
     @Column(unique = true)
     private String userNickName;
@@ -55,7 +54,7 @@ public class User implements UserDetails {
     @PrePersist
     private void init() {
         createAt = LocalDate.now();
-        if (userName == null) userName = "id" + id;
+        if (userBIO == null) userBIO = "id" + id;
         if (userNickName == null) userNickName = "id" + id;
     }
 
@@ -71,7 +70,7 @@ public class User implements UserDetails {
 
     @Override
     public String getUsername() {
-        return userName;
+        return userEmail;
     }
 
     @Override

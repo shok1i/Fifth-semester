@@ -25,14 +25,14 @@ public class AdminController {
     @GetMapping("/admin")
     public String adminPage(Model model, Principal principal) {
         model.addAttribute("users", userService.getAllUsers());
-        model.addAttribute("currentUser", userService.getUSerByPrinciple(principal));
+        model.addAttribute("currentUser", userService.getUserByPrinciple(principal));
         return "admin";
     }
 
     @GetMapping("/admin/edit/{user}")
     public String changeUserRoles(@PathVariable("user") User user, Model model, Principal principal) {
         model.addAttribute("user", user);
-        model.addAttribute("currentUser", userService.getUSerByPrinciple(principal));
+        model.addAttribute("currentUser", userService.getUserByPrinciple(principal));
         model.addAttribute("roles", Role.values());
         return "user-change-roles";
     }

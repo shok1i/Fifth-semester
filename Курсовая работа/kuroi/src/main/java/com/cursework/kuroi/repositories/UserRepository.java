@@ -2,13 +2,10 @@ package com.cursework.kuroi.repositories;
 
 import com.cursework.kuroi.models.User;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-import java.security.Principal;
-
+@Repository
 public interface UserRepository extends JpaRepository<User, Long> {
     User findByUserEmail(String userEmail);
-
-    User findByNickname(String nickname);
-
-    User findByPrinciple(Principal principal);
+    User findByUserNickName(String userNickName);
 }

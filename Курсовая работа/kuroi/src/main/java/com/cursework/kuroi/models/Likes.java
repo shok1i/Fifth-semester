@@ -14,10 +14,12 @@ import java.time.LocalDate;
 @Table(name = "likes")
 public class Likes {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
     @ManyToOne
     private User user;
 
-    @Id
     @ManyToOne
     private Art art;
 

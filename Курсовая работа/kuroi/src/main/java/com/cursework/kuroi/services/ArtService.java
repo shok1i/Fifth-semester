@@ -32,7 +32,7 @@ public class ArtService {
 
     public boolean addArt(Principal principal, Art art, MultipartFile file) throws IOException {
         if (file.getSize() != 0) {
-            art.setAuthor(userRepository.findByPrinciple(principal));
+            art.setAuthor(getUserByPrincipal(principal));
 
             Image image = new Image();
             image.setPath("img" + image.getId());
@@ -49,7 +49,7 @@ public class ArtService {
 
     public boolean deleteArt(Principal principal, Long id) {
         Art tempArt = artRepository.findById(id).orElse(null);
-        User tempUser = userRepository.findByPrinciple(principal);
+        User tempUser = getUserByPrincipal(principal);
         if (tempArt != null && tempUser != null && tempArt.getAuthor().getId().equals(tempUser.getId())) {
             artRepository.deleteById(id);
             return true;
@@ -58,6 +58,6 @@ public class ArtService {
     }
 
     public User getUserByPrincipal(Principal principal) {
-        return userRepository.findByPrinciple(principal);
+        return userRepository.findByUserEmail(principal.getName());
     }
 }

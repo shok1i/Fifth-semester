@@ -24,7 +24,7 @@ public class ArtController {
     @GetMapping("/gallery")
     public String products(@RequestParam(name = "searchWord", required = false) String title, Principal principal, Model model) {
         model.addAttribute("products", artService.getArtsByKeyword(title));
-        model.addAttribute("user", artService.getUserByPrincipal(principal));
+        model.addAttribute("currentUser", artService.getUserByPrincipal(principal));
         model.addAttribute("searchWord", title);
         return "gallery";
     }
@@ -32,7 +32,7 @@ public class ArtController {
     @GetMapping("/{nickname}/{id}")
     public String productInfo(@PathVariable String nickname, @PathVariable Long id, Model model, Principal principal) {
         Art art = artService.getArtById(id);
-        model.addAttribute("user", artService.getUserByPrincipal(principal));
+        model.addAttribute("currentUser", artService.getUserByPrincipal(principal));
         model.addAttribute("art", art);
         model.addAttribute("image", art.getImage());
         model.addAttribute("authorProduct", nickname);
@@ -49,8 +49,7 @@ public class ArtController {
 
     @GetMapping("/addart")
     public String addart(Principal principal, Model model) {
-        User user = artService.getUserByPrincipal(principal);
-        model.addAttribute("user", user);
+        model.addAttribute("currentUser", artService.getUserByPrincipal(principal));
         return "addart";
     }
 
