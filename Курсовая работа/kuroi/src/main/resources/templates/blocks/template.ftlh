@@ -15,7 +15,8 @@
     </head>
     <body>
 
-    <nav class="navbar navbar-expand-md navbar-light mx-auto sticky-top shadow-sm h-auto" role="navigation" id="navbar">
+    <nav class="navbar navbar-expand-md navbar-light mx-auto sticky-top shadow-sm h-auto" role="navigation" id="navbar"
+    style="font-size: 1.2em; backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); background-color: rgba(255, 255, 255, 0.55);}">
         <div class="container align-self-center align-content-center d-flex align-items-baseline">
             <a class="navbar-brand p-0" href="/">
                 <img src="/static/images/logo.svg" height="50px" style="max-height: 50px" alt=""></a>
@@ -27,6 +28,9 @@
 
             <div class="collapse navbar-collapse navbar-expand-lg justify-content-between" id="navbarText">
                 <ul class="navbar-nav me-auto mx-auto mb-2 mb-lg-0 d-flex align-items-baseline">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Главная</a>
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/gallery">Галерея</a>
                     </li>
@@ -50,9 +54,13 @@
                             <li><a class="dropdown-item" href="/${currentUser.userNickName}">Мои публикации</a></li>
 
                             <li>
-                                <form class="dropdown-item" action="/logout" method="post">
+                                <hr class="dropdown-divider">
+                            </li>
+
+                            <li>
+                                <form action="/logout" method="post">
                                     <input type="hidden" name="_csrf" value="${_csrf.token}"/>
-                                    <button type="submit"
+                                    <button type="submit" class="dropdown-item"
                                             style=" background: none; border: none;">
                                         Выйти
                                     </button>

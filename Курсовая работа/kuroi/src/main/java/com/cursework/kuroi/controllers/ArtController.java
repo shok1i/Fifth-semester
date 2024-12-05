@@ -23,7 +23,7 @@ public class ArtController {
     // Обработка GET-запросов
     @GetMapping("/gallery")
     public String products(@RequestParam(name = "searchWord", required = false) String title, Principal principal, Model model) {
-        model.addAttribute("products", artService.getArtsByKeyword(title));
+        model.addAttribute("arts", artService.getArtsByKeyword(title));
         model.addAttribute("currentUser", artService.getUserByPrincipal(principal));
         model.addAttribute("searchWord", title);
         return "gallery";
@@ -50,13 +50,13 @@ public class ArtController {
     @GetMapping("/addart")
     public String addart(Principal principal, Model model) {
         model.addAttribute("currentUser", artService.getUserByPrincipal(principal));
-        return "addart";
+        return "add-art";
     }
 
     // Обработка POST-запросов
     @PostMapping("/addart")
-    public String createProduct(@RequestParam("file") MultipartFile file, Art product, Principal principal) throws IOException {
-        artService.addArt(principal, product, file);
+    public String createProduct(@RequestParam("file") MultipartFile file, Art art, Principal principal) throws IOException {
+        artService.addArt(principal, art, file);
 
         User user = artService.getUserByPrincipal(principal);
         return "redirect:/" + user.getUserNickName();

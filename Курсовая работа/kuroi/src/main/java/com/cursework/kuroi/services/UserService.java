@@ -22,8 +22,8 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 public class UserService {
     private final UserRepository userRepository;
-    private final PasswordEncoder passwordEncoder;
     private final ImageRepository imageRepository;
+    private final PasswordEncoder passwordEncoder;
 
     public boolean addUser(User user) {
         String email = user.getUserEmail();
@@ -76,13 +76,13 @@ public class UserService {
     public boolean changeUserInformation(Principal principal, String userBIO, String userNickName, MultipartFile file) throws IOException {
         User userFromDB =  userRepository.findByUserEmail(getUserByPrinciple(principal).getUserEmail());
 
-        // TODO: Сделать уделение фотографии если у пользователя она уже есть
+        // TODO: Сделать удаление фотографии если у пользователя она уже есть
         // Изменение фото, если есть
         if (file.getSize() != 0) {
-            if (userFromDB.getImage() != null) {
-                imageRepository.delete(userFromDB.getImage());
-            }
             Image image = new Image();
+            if (userFromDB.getImage() != null)
+                image = imageRepository.findById(userFromDB.getImage().getId()).orElse(null);
+
             image.setPath("img" + image.getId());
             image.setContentType(file.getContentType());
             image.setSize(file.getSize());

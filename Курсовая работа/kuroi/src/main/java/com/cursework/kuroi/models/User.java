@@ -48,7 +48,7 @@ public class User implements UserDetails {
     private List<Art> arts = new ArrayList<>();
 
     @OneToMany(cascade = CascadeType.ALL)
-    private List<Likes> likes = new ArrayList<>();
+    private List<_Likes> likes = new ArrayList<>();
 
     // Производим инициализацию
     @PrePersist

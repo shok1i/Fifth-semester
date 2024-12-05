@@ -6,6 +6,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @Entity
@@ -28,6 +30,10 @@ public class Art {
     private String description;
 
     private LocalDate publishDate;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<_Likes> likes = new ArrayList<>();
+
 
     // Производим инициализайцию
     @PrePersist
