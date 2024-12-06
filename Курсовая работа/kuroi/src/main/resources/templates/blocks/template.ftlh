@@ -61,6 +61,7 @@
                         <ul class="dropdown-menu dropdown-menu-lg-end">
                             <li><a class="dropdown-item" href="/account">Аккаунт</a></li>
                             <li><a class="dropdown-item" href="/${currentUser.userNickName}">Мои публикации</a></li>
+                            <li><a class="dropdown-item" href="/addart">Добавить штуку</a></li>
 
                             <li>
                                 <hr class="dropdown-divider">
@@ -86,10 +87,11 @@
         </div>
     </nav>
 
-    <div class="container-fluid mx-0 mb-2 py-1" style="display:block">
-
-
-    </div>
+    <#if currentUser?contains("ROLE_ADMIN")>
+        <div class="container-fluid mx-0 mb-2 py-1">
+            <a href="/admin_panel">Панель администратора</a>
+        </div>
+    </#if>>
 
     <div>
         <#nested/>

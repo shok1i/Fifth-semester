@@ -58,22 +58,6 @@ public class UserController {
         return "account";
     }
 
-    @GetMapping("/{nickname}")
-    public String userProducts(@PathVariable String nickname, Principal principal, Model model) {
-        User currentUser = userService.getUserByPrinciple(principal);
-
-        if (userRepository.findByUserNickName(nickname) != null) {
-            User find = userRepository.findByUserNickName(nickname);
-            List<Art> findArts = artRepository.findByAuthorId(find.getId());
-
-            model.addAttribute("currentUser", currentUser);
-            model.addAttribute("findUser", find);
-            model.addAttribute("arts", findArts);
-            return "user-arts";
-        }
-        ///  TODO: Можно сделать редирект на ПОЛЬЗОВАТЕЛЬ НЕ НАЙДЕН
-        return "redirect:/";
-    }
 
     @GetMapping("/account/edit")
     public String accountEdit(Principal principal, Model model) {
@@ -92,7 +76,7 @@ public class UserController {
             return "registration";
         }
 
-        return "redirect:/";
+        return "redirect:/login";
     }
 
     @PostMapping("/account/edit")

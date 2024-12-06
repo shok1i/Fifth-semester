@@ -2,7 +2,10 @@ package com.cursework.kuroi.controllers;
 
 import com.cursework.kuroi.models.Art;
 import com.cursework.kuroi.models.User;
+import com.cursework.kuroi.repositories.ArtRepository;
+import com.cursework.kuroi.repositories.UserRepository;
 import com.cursework.kuroi.services.ArtService;
+import com.cursework.kuroi.services.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,11 +17,16 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.security.Principal;
+import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
 public class ArtController {
     private final ArtService artService;
+    private final ArtRepository artRepository;
+
+    private final UserService userService;
+    private final UserRepository userRepository;
 
     // Обработка GET-запросов
     @GetMapping("/gallery")
@@ -30,13 +38,33 @@ public class ArtController {
         return "gallery";
     }
 
+    @GetMapping("/{nickname}")
+    public String userProducts(@PathVariable String nickname, Principal principal, Model model) {
+        User currentUser = userService.getUserByPrinciple(principal);
+
+        if (userRepository.findByUserNickName(nickname) != null) {
+            User find = userRepository.findByUserNickName(nickname);
+            List<Art> findArts = artRepository.findByAuthorId(find.getId());
+
+            model.addAttribute("currentUser", currentUser);
+            model.addAttribute("findUser", find);
+            model.addAttribute("arts", findArts);
+            return "user-arts";
+        }
+
+        ///  TODO: Можно сделать редирект на ПОЛЬЗОВАТЕЛЬ НЕ НАЙДЕН
+        return "redirect:/";
+    }
+
     @GetMapping("/{nickname}/{id}")
     public String productInfo(@PathVariable String nickname, @PathVariable Long id, Model model, Principal principal) {
         Art art = artService.getArtById(id);
+
         model.addAttribute("currentUser", artService.getUserByPrincipal(principal));
+
         model.addAttribute("art", art);
-        model.addAttribute("image", art.getImage());
-        model.addAttribute("authorProduct", nickname);
+        model.addAttribute("author", userRepository.findByUserNickName(nickname));
+
         return "art-info";
     }
 

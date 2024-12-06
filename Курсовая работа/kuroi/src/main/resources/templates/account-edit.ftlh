@@ -18,13 +18,13 @@
                     <div class="container p-3">
                         <h3>
                             ${currentUser.userBIO}<br>
-                            <span style="font-weight: 300; font-size: 0.75em;">${currentUser.userNickName}</span>
+                            <span style="font-weight: 300; font-size: 0.75em;">@${currentUser.userNickName}</span>
                         </h3>
 
                         <p>
                             <span class="h5" style="color: #6cabd9">Почта</span>
                             <br>
-                            @${currentUser.userEmail}
+                            ${currentUser.userEmail}
                         </p>
 
                         <p>

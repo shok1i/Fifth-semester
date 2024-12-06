@@ -23,10 +23,13 @@ public class AdminController {
 
     // Обработка GET-запросов
     @GetMapping("/admin_panel")
-    public String adminPage(Model model, Principal principal) {
-        model.addAttribute("users", userService.getAllUsers());
+    public String adminPage(@RequestParam(name = "searchWord", required = false) String title, Model model, Principal principal) {
+        model.addAttribute("users", userService.getUserByKeyWord(title));
         model.addAttribute("currentUser", userService.getUserByPrinciple(principal));
-        return "admin";
+
+        model.addAttribute("searchWord", title);
+
+        return "admin-panel";
     }
 
     @GetMapping("/admin_panel/edit/{user}")

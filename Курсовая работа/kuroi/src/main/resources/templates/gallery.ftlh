@@ -6,13 +6,8 @@
             <div class="col-12 col-md-10">
                 <div class="row justify-content-between align-items-center pb-3">
                     <div class="col-auto justify-content-lg-start">
-                        <h3>Галерея стикеров
-                            <span class="bi bi-info-circle text-muted" data-bs-toggle="tooltip"
-                                  style="font-size: 1.5rem"
-                                  data-bs-title="Это пространство, в которое пользователи сайта добавляют свои стикеры для продажи."
-                                  data-bs-placement="right">
-                            </span>
-                        </h3>
+                        <h3>Галерея стикеров</h3>
+                        
                         <h5>Популярные стикеры</h5>
 
                         <a class="text-danger text-decoration-none" href="/gallery">За неделю </a> /
@@ -34,7 +29,7 @@
                         <form class="input-group w-100 mb-2" action="/gallery" method="get">
                             <input type="text" name="searchWord" class="form-control text-center shadow-sm"
                                    placeholder="Поиск интересной штуки" value="<#if searchWord??>${searchWord}<#else></#if>"/>
-                            <button type="submit" class="btn btn-outline-primary" data-mdb-ripple-init>Найти</button>
+                            <button type="submit" class="btn btn-outline-primary shadow-sm" data-mdb-ripple-init>Найти</button>
                         </form>
 
                     <div class="posts ">
@@ -47,7 +42,7 @@
                                             <div class="col-auto px-1">
                                                 <a href="/${art.author.userNickName}">
                                                     <img alt="" style="border-radius: 50%; height: 30px; width: 30px;"
-                                                          src=<#if currentUser.image??>"/images/${currentUser.image.id}"<#else>"/static/images/profile.svg"</#if>>
+                                                          src=<#if art.author.image??>"/images/${art.author.image.id}"<#else>"/static/images/profile.svg"</#if>>
                                                 </a>
                                             </div>
                                             <div class="col-auto px-0">
@@ -91,7 +86,7 @@
             </div>
         </div>
     </div>
-    </div>
+
 </@t.template>
 
 

@@ -32,14 +32,15 @@ public class UserService {
 
         // Натсройка пользовотеля по умолчанию
         user.setActive(true);
-        user.getRoles().add(Role.ROLE_USER);
+        user.getRoles().add(Role.ROLE_ADMIN);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
 
         userRepository.save(user);
         return true;
     }
 
-    public List<User> getAllUsers() {
+    public List<User> getUserByKeyWord(String keyword) {
+        if (keyword != null) return userRepository.findByKeyword(keyword);
         return userRepository.findAll();
     }
 

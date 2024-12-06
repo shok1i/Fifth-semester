@@ -19,8 +19,7 @@
 
                         <img width="180" height="180" class="rounded-circle"
                              style="border: 0.3rem solid #6cabd9; background-color: #6cabd9;"
-                             src=<#if findUser.image??>"/images/${findUser.image.id}"<#else>"/static/images/profile.svg"</#if>
-                        >
+                             src=<#if findUser.image??>"/images/${findUser.image.id}"<#else>"/static/images/profile.svg"</#if>>
 
 
                         <h3 style="transform: translateX(5%);">${findUser.userBIO}<br><span
@@ -40,8 +39,8 @@
                 <div id="app" data-v-app="">
                     <div class="posts">
                         <div class="row">
-                            <#if arts??>
-                                <#list arts as art>
+                            <#if findUser.arts??>
+                                <#list findUser.arts as art>
                                     <div class="col-6 col-md-6 col-lg-4 col-xl-3 posts__post post mt-2 post_active">
                                         <div class="card">
                                             <div class="card-header position-relative">
@@ -50,7 +49,7 @@
                                                         <a href="/${art.author.userNickName}">
                                                             <img alt=""
                                                                  style="border-radius: 50%; height: 30px; width: 30px;"
-                                                                 src=<#if currentUser.image??>"/images/${currentUser.image.id}"<#else>"/static/images/profile.svg"</#if>
+                                                                 src=<#if art.author.image??>"/images/${art.author.image.id}"<#else>"/static/images/profile.svg"</#if>
                                                             >
                                                         </a>
                                                     </div>
