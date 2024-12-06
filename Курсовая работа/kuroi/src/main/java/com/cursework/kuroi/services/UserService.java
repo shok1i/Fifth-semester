@@ -32,7 +32,7 @@ public class UserService {
 
         // Натсройка пользовотеля по умолчанию
         user.setActive(true);
-        user.getRoles().add(Role.ROLE_ADMIN);
+        user.getRoles().add(Role.ROLE_USER);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
 
         userRepository.save(user);
@@ -44,28 +44,27 @@ public class UserService {
         return userRepository.findAll();
     }
 
+    public Object getAll() {
+        return userRepository.findAll();
+    }
+
     public void changeUserBanStatus(Long id) {
         User user = userRepository.findById(id).orElse(null);
         if (user != null) {
-            if (user.isActive()) {
-                user.setActive(false);
-                log.info("User banned with id: {}", id);
-            } else {
-                user.setActive(true);
-                log.info("User unbanned with id: {}", id);
-            }
+            user.setActive(!user.isActive());
             userRepository.save(user);
         }
     }
 
-    public void changeUserRoles(User user, Map<String, String> form) {
+    public void changeUserRoles(String userEmail, String newRole) {
         Set<String> roles = Arrays.stream(Role.values()).map(Enum::name).collect(Collectors.toSet());
+        User user = userRepository.findByUserEmail(userEmail);
+
         user.getRoles().clear();
-        for (String role : form.keySet()) {
-            if (roles.contains(role)) {
-                user.getRoles().add(Role.valueOf(role));
-            }
-        }
+
+        if (roles.contains(newRole))
+            user.getRoles().add(Role.valueOf(newRole));
+
         userRepository.save(user);
     }
 
@@ -76,7 +75,7 @@ public class UserService {
 
     @Transactional
     public boolean changeUserInformation(Principal principal, String userBIO, String userNickName, MultipartFile file) throws IOException {
-        User userFromDB =  userRepository.findByUserEmail(getUserByPrinciple(principal).getUserEmail());
+        User userFromDB = userRepository.findByUserEmail(getUserByPrinciple(principal).getUserEmail());
 
         // TODO: Сделать удаление фотографии если у пользователя она уже есть
         // Изменение фото, если есть
@@ -104,4 +103,6 @@ public class UserService {
 
         return true;
     }
+
+
 }

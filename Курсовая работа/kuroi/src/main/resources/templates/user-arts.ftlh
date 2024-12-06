@@ -39,7 +39,7 @@
                 <div id="app" data-v-app="">
                     <div class="posts">
                         <div class="row">
-                            <#if findUser.arts??>
+                            <#if findUser.arts?size != 0>
                                 <#list findUser.arts as art>
                                     <div class="col-6 col-md-6 col-lg-4 col-xl-3 posts__post post mt-2 post_active">
                                         <div class="card">
@@ -94,8 +94,7 @@
                             <#else>
                                 <div class="container" style="">
                                     <div class="card bg-light">
-                                        <div class="card-body"><h4 class="text-center">К сожалению у данный пользователь
-                                                еще не добавил свои штуки на сайт.</h4></div>
+                                        <div class="card-body"><h4 class="text-center">К сожалению данный пользователь еще не добавил свои штуки на сайт.</h4></div>
                                     </div>
                                 </div>
                             </#if>

@@ -4,6 +4,7 @@ import com.cursework.kuroi.models.User;
 import com.cursework.kuroi.models.enums.Role;
 import com.cursework.kuroi.services.UserService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.security.Principal;
 import java.util.Map;
 
+@Slf4j
 @Controller
 @RequiredArgsConstructor
 @PreAuthorize("hasAuthority('ROLE_ADMIN')")
@@ -24,31 +26,28 @@ public class AdminController {
     // Обработка GET-запросов
     @GetMapping("/admin_panel")
     public String adminPage(@RequestParam(name = "searchWord", required = false) String title, Model model, Principal principal) {
-        model.addAttribute("users", userService.getUserByKeyWord(title));
-        model.addAttribute("currentUser", userService.getUserByPrinciple(principal));
+        if (title != null)
+            if (title.isEmpty())
+                title = null;
 
+        model.addAttribute("users", userService.getUserByKeyWord(title));
         model.addAttribute("searchWord", title);
+
+        model.addAttribute("currentUser", userService.getUserByPrinciple(principal));
+        model.addAttribute("roles", Role.values());
 
         return "admin-panel";
     }
 
-    @GetMapping("/admin_panel/edit/{user}")
-    public String changeUserRoles(@PathVariable("user") User user, Model model, Principal principal) {
-        model.addAttribute("user", user);
-        model.addAttribute("currentUser", userService.getUserByPrinciple(principal));
-        model.addAttribute("roles", Role.values());
-        return "user-change-roles";
-    }
-
     // Обработка POST-запросов
     @PostMapping("/admin_panel/edit")
-    public String changeUserRoles(@RequestParam("user") User user, @RequestParam Map<String, String> form) {
-        userService.changeUserRoles(user, form);
-        return "redirect:/admin_panel" + user.getId();
+    public String changeUserRoles(@RequestParam("editUser") String editUserEmail, @RequestParam("newRole") String newRole) {
+        userService.changeUserRoles(editUserEmail, newRole);
+        return "redirect:/admin_panel";
     }
 
     @PostMapping("/admin_panel/ban")
-    public String banUser(@RequestParam("id") Long id){
+    public String banUser(@RequestParam("editUser") Long id){
         userService.changeUserBanStatus(id);
         return "redirect:/admin_panel";
     }

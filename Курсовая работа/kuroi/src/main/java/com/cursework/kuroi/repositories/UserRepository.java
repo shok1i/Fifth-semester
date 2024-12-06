@@ -14,8 +14,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
     User findByUserEmail(String userEmail);
     User findByUserNickName(String userNickName);
 
-
-    // TODO: Посмотреть как в этот запрос поместить еще и Long ID
-    @Query("SELECT p FROM User p WHERE p.userEmail LIKE %:keyword% OR p.userNickName LIKE %:keyword%")
+    @Query("SELECT p FROM User p WHERE p.id = :keyword OR p.userEmail LIKE %:keyword% OR p.userNickName LIKE %:keyword%")
     List<User> findByKeyword(@Param("keyword") String keyword);
 }

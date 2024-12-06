@@ -20,12 +20,14 @@
 
         <title>KuroiStickers</title>
 
+        <link rel="shortcut icon" type="image/svg" href="/static/images/favicon.svg">
+
         <meta name="viewport" content="width=device-width, initial-scale=1">
     </head>
     <body>
 
     <nav class="navbar navbar-expand-md navbar-light mx-auto sticky-top shadow-sm h-auto" role="navigation" id="navbar"
-    style="font-size: 1.2em; backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); background-color: rgba(255, 255, 255, 0.55);}">
+         style="font-size: 1.2em; backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); background-color: rgba(255, 255, 255, 0.55);}">
         <div class="container align-self-center align-content-center d-flex align-items-baseline">
             <a class="navbar-brand p-0" href="/">
                 <img src="/static/images/logo.svg" height="50px" style="max-height: 50px" alt=""></a>
@@ -55,13 +57,25 @@
                             <img alt="" class="circle" height="40px" width="40px"
                                  style="max-height: 40px; max-width: 40px; border-radius:50%"
 
-                                 src=<#if currentUser.image??>"/images/${currentUser.image.id}"<#else>"/static/images/profile.svg"</#if>>
+                                 src=<#if currentUser.image??>"/images/${currentUser.image.id}"<#else>"/static/images/profile.svg"</#if>
+                            >
                         </a>
 
                         <ul class="dropdown-menu dropdown-menu-lg-end">
                             <li><a class="dropdown-item" href="/account">Аккаунт</a></li>
                             <li><a class="dropdown-item" href="/${currentUser.userNickName}">Мои публикации</a></li>
                             <li><a class="dropdown-item" href="/addart">Добавить штуку</a></li>
+
+                            <#if currentUser.isAdmin()>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+
+                                <li>
+                                    <a class="dropdown-item" href="/admin_panel">Панель администратора</a>
+                                </li>
+
+                            </#if>
 
                             <li>
                                 <hr class="dropdown-divider">
@@ -87,11 +101,7 @@
         </div>
     </nav>
 
-    <#if currentUser?contains("ROLE_ADMIN")>
-        <div class="container-fluid mx-0 mb-2 py-1">
-            <a href="/admin_panel">Панель администратора</a>
-        </div>
-    </#if>>
+    <div class="container-fluid mx-0 mb-2 py-1" style="display:block"></div>
 
     <div>
         <#nested/>
