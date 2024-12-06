@@ -13,4 +13,6 @@ public interface ArtRepository extends JpaRepository<Art, Long> {
     // Запрос в SQL аблицу для поиска по содержанию слова в названии, описании или в авторе
     @Query("SELECT p FROM Art p WHERE p.title LIKE %:keyword% OR p.description LIKE %:keyword% OR p.author.userNickName LIKE %:keyword%")
     List<Art> findByKeyword(@Param("keyword") String keyword);
+
+    List<Art> findByAuthorId(Long id);
 }

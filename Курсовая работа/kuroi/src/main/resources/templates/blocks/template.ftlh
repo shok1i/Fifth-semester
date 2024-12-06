@@ -5,13 +5,22 @@
         <!-- Bootstrap CSS -->
         <!-- Bootstrap CSS -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link href="/static/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <link href="/static/bootstrap/css/bootstrap-reboot.css" rel="stylesheet">
+        <link href="/static/css/animated_text.css" rel="stylesheet">
+        <link href="/static/css/my_css.css" rel="stylesheet">
+        <link href="/static/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+        <link href="/static/tt_norms_font/stylesheet.css" rel="stylesheet">
 
         <!-- Bootstrap JavaScript и Popper.js -->
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
 
+        <link rel="stylesheet" href="/static/css/some-css.css">
 
         <title>KuroiStickers</title>
+
+        <meta name="viewport" content="width=device-width, initial-scale=1">
     </head>
     <body>
 
@@ -35,7 +44,7 @@
                         <a class="nav-link" href="/gallery">Галерея</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/my">Моя полка</a>
+                        <a class="nav-link" href="/collection">Моя полка</a>
                     </li>
                 </ul>
 
@@ -82,7 +91,7 @@
 
     </div>
 
-    <div class="row justify-content-center">
+    <div>
         <#nested/>
     </div>
 

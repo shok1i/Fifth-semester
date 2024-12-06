@@ -22,14 +22,14 @@ public class AdminController {
     private final UserService userService;
 
     // Обработка GET-запросов
-    @GetMapping("/admin")
+    @GetMapping("/admin_panel")
     public String adminPage(Model model, Principal principal) {
         model.addAttribute("users", userService.getAllUsers());
         model.addAttribute("currentUser", userService.getUserByPrinciple(principal));
         return "admin";
     }
 
-    @GetMapping("/admin/edit/{user}")
+    @GetMapping("/admin_panel/edit/{user}")
     public String changeUserRoles(@PathVariable("user") User user, Model model, Principal principal) {
         model.addAttribute("user", user);
         model.addAttribute("currentUser", userService.getUserByPrinciple(principal));
@@ -38,15 +38,15 @@ public class AdminController {
     }
 
     // Обработка POST-запросов
-    @PostMapping("/admin/edit")
+    @PostMapping("/admin_panel/edit")
     public String changeUserRoles(@RequestParam("user") User user, @RequestParam Map<String, String> form) {
         userService.changeUserRoles(user, form);
-        return "redirect:/admin" + user.getId();
+        return "redirect:/admin_panel" + user.getId();
     }
 
-    @PostMapping("/admin/ban")
+    @PostMapping("/admin_panel/ban")
     public String banUser(@RequestParam("id") Long id){
         userService.changeUserBanStatus(id);
-        return "redirect:/admin";
+        return "redirect:/admin_panel";
     }
 }

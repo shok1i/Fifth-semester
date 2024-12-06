@@ -27,6 +27,7 @@ public class UserService {
 
     public boolean addUser(User user) {
         String email = user.getUserEmail();
+
         if (userRepository.findByUserEmail(email) != null) return false;
 
         // Натсройка пользовотеля по умолчанию
@@ -91,11 +92,6 @@ public class UserService {
 
             userFromDB.setImage(image);
         }
-
-        // Изменение никнейма
-        log.info("User fromDB: {}; User from input: {};", userFromDB.getUserNickName(), userNickName);
-        log.info("User fromDB find by Nickname == NULL: {};", userRepository.findByUserNickName(userNickName) == null);
-        log.info("User fromDB == userNickName: {};", userFromDB.getUserNickName() == userNickName);
 
         if (userRepository.findByUserNickName(userNickName) == null || Objects.equals(userFromDB.getUserNickName(), userNickName))
             userFromDB.setUserNickName(userNickName);

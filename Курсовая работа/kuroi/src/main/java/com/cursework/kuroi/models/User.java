@@ -42,13 +42,15 @@ public class User implements UserDetails {
     private Set<Role> roles = new HashSet<>();
 
     @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn
     private Image image;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "author")
     private List<Art> arts = new ArrayList<>();
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private List<_Likes> likes = new ArrayList<>();
+
 
     // Производим инициализацию
     @PrePersist
@@ -91,5 +93,10 @@ public class User implements UserDetails {
     @Override
     public boolean isEnabled() {
         return active;
+    }
+
+    public void addArt(Art art) {
+        art.setAuthor(this);
+        arts.add(art);
     }
 }

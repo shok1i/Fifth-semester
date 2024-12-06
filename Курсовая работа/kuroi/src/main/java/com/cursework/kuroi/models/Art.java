@@ -22,6 +22,7 @@ public class Art {
     private String title;
 
     @ManyToOne(cascade = CascadeType.REFRESH)
+    @JoinColumn
     private User author;
 
     @OneToOne(cascade = CascadeType.ALL)
@@ -31,7 +32,7 @@ public class Art {
 
     private LocalDate publishDate;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "art")
     private List<_Likes> likes = new ArrayList<>();
 
 

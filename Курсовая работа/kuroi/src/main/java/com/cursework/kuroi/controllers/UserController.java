@@ -1,10 +1,18 @@
 package com.cursework.kuroi.controllers;
 
+import com.cursework.kuroi.models.Art;
 import com.cursework.kuroi.models.User;
+import com.cursework.kuroi.repositories.ArtRepository;
+import com.cursework.kuroi.repositories.ImageRepository;
 import com.cursework.kuroi.repositories.UserRepository;
 import com.cursework.kuroi.services.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,6 +22,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.security.Principal;
+import java.util.List;
 
 @Slf4j
 @Controller
@@ -21,10 +30,12 @@ import java.security.Principal;
 public class UserController {
     private final UserService userService;
     private final UserRepository userRepository;
+    private final ImageRepository imageRepository;
+    private final ArtRepository artRepository;
 
     // Обработка GET-запросов
     @GetMapping("/")
-    public String home (Principal principal, Model model) {
+    public String home(Principal principal, Model model) {
         model.addAttribute("currentUser", userService.getUserByPrinciple(principal));
         return "home";
     }
@@ -47,19 +58,27 @@ public class UserController {
         return "account";
     }
 
+    @GetMapping("/{nickname}")
+    public String userProducts(@PathVariable String nickname, Principal principal, Model model) {
+        User currentUser = userService.getUserByPrinciple(principal);
+
+        if (userRepository.findByUserNickName(nickname) != null) {
+            User find = userRepository.findByUserNickName(nickname);
+            List<Art> findArts = artRepository.findByAuthorId(find.getId());
+
+            model.addAttribute("currentUser", currentUser);
+            model.addAttribute("findUser", find);
+            model.addAttribute("arts", findArts);
+            return "user-arts";
+        }
+        ///  TODO: Можно сделать редирект на ПОЛЬЗОВАТЕЛЬ НЕ НАЙДЕН
+        return "redirect:/";
+    }
+
     @GetMapping("/account/edit")
     public String accountEdit(Principal principal, Model model) {
         model.addAttribute("currentUser", userService.getUserByPrinciple(principal));
         return "account-edit";
-    }
-
-    // Todo: Тут логика в том что мы из likes будем получать Art и выводить их
-    @GetMapping("/my")
-    public String my(Principal principal, Model model) {
-        User currentUser = userService.getUserByPrinciple(principal);
-        model.addAttribute("currentUser",currentUser);
-        model.addAttribute("likes", currentUser.getLikes());
-        return "user-info";
     }
 
     // Обработка POST-запросов
@@ -72,7 +91,8 @@ public class UserController {
             model.addAttribute("errorMessage", "Пользователь с email: " + user.getUserEmail() + " уже существует");
             return "registration";
         }
-        return "redirect:/login";
+
+        return "redirect:/";
     }
 
     @PostMapping("/account/edit")

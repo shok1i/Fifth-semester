@@ -26,6 +26,7 @@ public class ArtController {
         model.addAttribute("arts", artService.getArtsByKeyword(title));
         model.addAttribute("currentUser", artService.getUserByPrincipal(principal));
         model.addAttribute("searchWord", title);
+
         return "gallery";
     }
 
@@ -37,14 +38,6 @@ public class ArtController {
         model.addAttribute("image", art.getImage());
         model.addAttribute("authorProduct", nickname);
         return "art-info";
-    }
-
-    @GetMapping("/{nickname}")
-    public String userProducts(@PathVariable String nickname, Principal principal, Model model) {
-        User user = artService.getUserByPrincipal(principal);
-        model.addAttribute("currentUser", user);
-        model.addAttribute("arts", user.getArts());
-        return "user-arts";
     }
 
     @GetMapping("/addart")

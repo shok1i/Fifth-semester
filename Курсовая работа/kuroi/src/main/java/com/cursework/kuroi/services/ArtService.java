@@ -31,17 +31,24 @@ public class ArtService {
     }
 
     public boolean addArt(Principal principal, Art art, MultipartFile file) throws IOException {
-        if (file.getSize() != 0) {
-            art.setAuthor(getUserByPrincipal(principal));
+        User user = getUserByPrincipal(principal);
 
+
+        if (file.getSize() != 0) {
             Image image = new Image();
+
+            art.setAuthor(user);
+
             image.setPath("img" + image.getId());
             image.setContentType(file.getContentType());
             image.setSize(file.getSize());
             image.setBytes(file.getBytes());
+            image.setArt(art);
 
             art.setImage(image);
+
             artRepository.save(art);
+
             return true;
         }
         return false;

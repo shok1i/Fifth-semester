@@ -25,8 +25,10 @@ public class Image {
     private byte[] bytes;
 
     @ManyToOne(cascade = CascadeType.REFRESH)
+    @JoinColumn
     private Art art;
 
     @OneToOne(cascade = CascadeType.REFRESH)
+    @JoinColumn
     private User user;
 }
