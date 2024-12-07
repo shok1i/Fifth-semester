@@ -99,12 +99,6 @@
                                                     </form>
                                                 </div>
                                             </div>
-
-                                            <span class="col-1 justify-content-end" style="white-space: nowrap;">
-                                    <span class="text-like me-1" id="likesCount">0</span>
-                                    <svg class="heart" viewBox="0 0 1546.02 1347.49" style="width: 20px;"><path
-                                                d="M1515.78,257.58A412.62,412.62,0,0,1,1425.06,705L789.31,1340.73a23,23,0,0,1-32.61,0L121,705A413,413,0,1,1,705,121l68,68,68-68a413.2,413.2,0,0,1,674.75,136.62Z"></path></svg>
-                                    </span>
                                         </div>
 
                                     </div>

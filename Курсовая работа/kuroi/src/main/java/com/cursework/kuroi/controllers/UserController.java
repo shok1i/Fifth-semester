@@ -29,9 +29,6 @@ import java.util.List;
 @RequiredArgsConstructor
 public class UserController {
     private final UserService userService;
-    private final UserRepository userRepository;
-    private final ImageRepository imageRepository;
-    private final ArtRepository artRepository;
 
     // Обработка GET-запросов
     @GetMapping("/")
@@ -63,6 +60,12 @@ public class UserController {
     public String accountEdit(Principal principal, Model model) {
         model.addAttribute("currentUser", userService.getUserByPrinciple(principal));
         return "account-edit";
+    }
+
+    @GetMapping("/current-user")
+    public User currentUser(Principal principal, Model model) {
+        model.addAttribute("currentUser", userService.getUserByPrinciple(principal));
+        return userService.getUserByPrinciple(principal);
     }
 
     // Обработка POST-запросов

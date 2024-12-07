@@ -28,7 +28,7 @@ public class UserService {
     public boolean addUser(User user) {
         String email = user.getUserEmail();
 
-        if (userRepository.findByUserEmail(email) != null) return false;
+        if (userRepository.getUser_ByUserEmail(email) != null) return false;
 
         // Натсройка пользовотеля по умолчанию
         user.setActive(true);
@@ -40,7 +40,7 @@ public class UserService {
     }
 
     public List<User> getUserByKeyWord(String keyword) {
-        if (keyword != null) return userRepository.findByKeyword(keyword);
+        if (keyword != null) return userRepository.getUsers_ByKeyword(keyword);
         return userRepository.findAll();
     }
 
@@ -58,7 +58,7 @@ public class UserService {
 
     public void changeUserRoles(String userEmail, String newRole) {
         Set<String> roles = Arrays.stream(Role.values()).map(Enum::name).collect(Collectors.toSet());
-        User user = userRepository.findByUserEmail(userEmail);
+        User user = userRepository.getUser_ByUserEmail(userEmail);
 
         user.getRoles().clear();
 
@@ -70,14 +70,13 @@ public class UserService {
 
     public User getUserByPrinciple(Principal principal) {
         if (principal == null) return new User();
-        return userRepository.findByUserEmail(principal.getName());
+        return userRepository.getUser_ByUserEmail(principal.getName());
     }
 
     @Transactional
     public boolean changeUserInformation(Principal principal, String userBIO, String userNickName, MultipartFile file) throws IOException {
-        User userFromDB = userRepository.findByUserEmail(getUserByPrinciple(principal).getUserEmail());
+        User userFromDB = userRepository.getUser_ByUserEmail(getUserByPrinciple(principal).getUserEmail());
 
-        // TODO: Сделать удаление фотографии если у пользователя она уже есть
         // Изменение фото, если есть
         if (file.getSize() != 0) {
             Image image = new Image();
@@ -93,7 +92,7 @@ public class UserService {
             userFromDB.setImage(image);
         }
 
-        if (userRepository.findByUserNickName(userNickName) == null || Objects.equals(userFromDB.getUserNickName(), userNickName))
+        if (userRepository.getUser_ByUserNickName(userNickName) == null || Objects.equals(userFromDB.getUserNickName(), userNickName))
             userFromDB.setUserNickName(userNickName);
         else
             return false;

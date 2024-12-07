@@ -19,7 +19,8 @@
 
                         <img width="180" height="180" class="rounded-circle"
                              style="border: 0.3rem solid #6cabd9; background-color: #6cabd9;"
-                             src=<#if findUser.image??>"/images/${findUser.image.id}"<#else>"/static/images/profile.svg"</#if>>
+                             src=<#if findUser.image??>"/images/${findUser.image.id}"<#else>"/static/images/profile.svg"</#if>
+                        >
 
 
                         <h3 style="transform: translateX(5%);">${findUser.userBIO}<br><span
@@ -72,18 +73,6 @@
                                                             <div class="col-8">
                                                                 <span>${art.title}</span>
                                                             </div>
-                                                            <div class="col-4 text-end align-self-start">
-                                                                <div class="" id="likesDiv">
-                                                            <span class="d-block" style="white-space: nowrap;">
-                                                                <span class="text-like me-1"
-                                                                      id="likesCount">${art.likes?size}</span>
-                                                                <svg class="heart" viewBox="0 0 1546.02 1347.49"
-                                                                     style="width: 20px;">
-                                                                    <path d="M1515.78,257.58A412.62,412.62,0,0,1,1425.06,705L789.31,1340.73a23,23,0,0,1-32.61,0L121,705A413,413,0,1,1,705,121l68,68,68-68a413.2,413.2,0,0,1,674.75,136.62Z"></path>
-                                                                </svg>
-                                                            </span>
-                                                                </div>
-                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -94,7 +83,8 @@
                             <#else>
                                 <div class="container" style="">
                                     <div class="card bg-light">
-                                        <div class="card-body"><h4 class="text-center">К сожалению данный пользователь еще не добавил свои штуки на сайт.</h4></div>
+                                        <div class="card-body"><h4 class="text-center">К сожалению данный пользователь
+                                                еще не добавил свои штуки на сайт.</h4></div>
                                     </div>
                                 </div>
                             </#if>

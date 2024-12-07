@@ -48,10 +48,6 @@ public class User implements UserDetails {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "author")
     private List<Art> arts = new ArrayList<>();
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
-    private List<_Likes> likes = new ArrayList<>();
-
-
     // Производим инициализацию
     @PrePersist
     private void init() {

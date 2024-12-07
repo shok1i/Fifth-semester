@@ -6,8 +6,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
 @Data
 @Entity
@@ -25,6 +23,10 @@ public class Art {
     @JoinColumn
     private User author;
 
+    @ManyToOne(cascade = CascadeType.REFRESH)
+    @JoinColumn
+    private _UserCollection userCollection;
+
     @OneToOne(cascade = CascadeType.ALL)
     private Image image;
 
@@ -32,14 +34,9 @@ public class Art {
 
     private LocalDate publishDate;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "art")
-    private List<_Likes> likes = new ArrayList<>();
-
-
     // Производим инициализайцию
     @PrePersist
     protected void init() {
         publishDate = LocalDate.now();
     }
-
 }

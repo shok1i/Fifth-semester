@@ -22,7 +22,7 @@ public class ArtService {
     private final UserRepository userRepository;
 
     public List<Art> getArtsByKeyword(String keyword) {
-        if (keyword != null) return artRepository.findByKeyword(keyword);
+        if (keyword != null) return artRepository.getArts_ByKeyword(keyword);
         return artRepository.findAll();
     }
 
@@ -66,6 +66,6 @@ public class ArtService {
 
     public User getUserByPrincipal(Principal principal) {
         if (principal == null) return new User();
-        return userRepository.findByUserEmail(principal.getName());
+        return userRepository.getUser_ByUserEmail(principal.getName());
     }
 }

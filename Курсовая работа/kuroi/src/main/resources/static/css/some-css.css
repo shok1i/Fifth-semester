@@ -59,3 +59,239 @@
     opacity: 0.9;
     text-align: justify;
 }
+
+.lutra-btn-outline {
+    color: #E63946;
+    border-color: #E63946;
+}
+
+.lutra-btn-outline:hover {
+    color: #fff;
+    background-color: #E63946;
+    border-color: #E63946;
+}
+
+.lutra-btn {
+    color: #fff;
+    background-color: #E63946;
+    border-color: #E63946;
+}
+
+.lutra-btn:hover {
+    color: #fff;
+    background-color: #b62b34;
+    border-color: #E63946;
+}
+
+.btn-check:checked + .btn-outline-primary, .btn-check:active + .btn-outline-primary, .btn-outline-primary:active, .btn-outline-primary.active, .btn-outline-primary.dropdown-toggle.show {
+    color: #fff;
+    background-color: #E63946;
+    border-color: #E63946;
+}
+
+.blue-lutra-btn-outline {
+    color: #325C97;
+    border-color: #325C97;
+}
+
+.blue-lutra-btn-outline:hover {
+    color: #fff;
+    background-color: #325C97;
+    border-color: #325C97;
+}
+
+.blue-lutra-btn {
+    color: #fff;
+    background-color: #325C97;
+    border-color: #325C97;
+}
+
+.dark-blue-lutra-btn-outline {
+    color: #1D3557;
+    border-color: #1D3557;
+}
+
+.dark-blue-lutra-btn-outline:hover {
+    color: #fff;
+    background-color: #1D3557;
+    border-color: #1D3557;
+}
+
+.dark-blue-lutra-btn {
+    color: #fff;
+    background-color: #1D3557;
+    border-color: #1D3557;
+}
+
+.mocha-lutra-btn-outline {
+    color: #8d99ae;
+    border-color: #8d99ae;
+}
+
+.mocha-lutra-btn-outline:hover {
+    color: #ffffff;
+    background-color: #8d99ae;
+    border-color: #8d99ae;
+}
+
+.mocha-lutra-btn {
+    color: #ffffff;
+    background-color: #8d99ae;
+    border-color: #8d99ae;
+}
+
+
+.mybtn-outline-telegram {
+    color: #0088cc;
+    border-color: #0088cc;
+}
+
+.mybtn-outline-telegram:hover {
+    color: #fff;
+    background-color: #0088cc;
+    border-color: #0088cc;
+}
+
+.mybtn-primary {
+    background-color: #E63946;
+    border-color: #E63946;
+    color: white;
+}
+
+.mybtn-primary:hover {
+    background-color: #d93642;
+    border-color: #d93642;
+    color: white;
+}
+
+
+/* The heart of the matter */
+.testimonial-group > .row {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+}
+
+.fade2 {
+    opacity: 1;
+}
+
+.fade2:hover {
+    opacity: 0.9;
+}
+
+.text-lutra {
+    color: #E63946
+}
+
+.text-dark-blue {
+    color: #1D3557
+}
+
+.bg-dark-blue-lutra {
+    background-color: #1D3557
+}
+
+.violet-badge {
+    background-color: #673AB7;
+    color: #ffffff;
+}
+
+.violet-badge:hover {
+    color: #ffffff;
+    background-color: #673AB7;
+}
+
+
+.heart.liked {
+    fill: #E63946;
+    position: relative;
+    transition: fill 100ms ease-in-out;
+    width: 20px;
+}
+
+.text-like.text-liked {
+    color: #E63946;
+    transition: color 100ms ease-in-out;
+
+}
+
+.text-like {
+    color: grey;
+    transition: color 100ms ease-in-out;
+}
+
+.heart {
+    fill: grey;
+    position: relative;
+    transition: fill 100ms ease-in-out;
+    width: 20px;
+}
+
+
+.sticky-top-panel {
+    position: sticky;
+    top: 4.5em;
+    bottom: 10em;
+}
+
+.end-25 {
+    right: 25% !important;
+}
+
+
+.rainbow-palette {
+    min-height: 2rem;
+    min-width: 4rem;
+    margin-right: 3px;
+    margin-left: 3px;
+    outline: #8d99ae solid 1px;
+    background: linear-gradient(
+            90deg,
+            rgba(255, 0, 0, 1) 0%,
+            rgba(255, 154, 0, 1) 10%,
+            rgba(208, 222, 33, 1) 20%,
+            rgba(79, 220, 74, 1) 30%,
+            rgba(63, 218, 216, 1) 40%,
+            rgba(47, 201, 226, 1) 50%,
+            rgba(28, 127, 238, 1) 60%,
+            rgba(95, 21, 242, 1) 70%,
+            rgba(186, 12, 248, 1) 80%,
+            rgba(251, 7, 217, 1) 90%,
+            rgba(255, 0, 0, 1) 100%
+    );
+}
+
+.color-palette {
+    min-height: 2rem;
+    min-width: 4rem;
+    outline: #8d99ae solid 1px;
+    margin-left: 3px;
+    margin-right: 3px;
+}
+
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type="number"] {
+    -moz-appearance: textfield;
+}
+
+input[type="number"]:hover,
+input[type="number"]:focus {
+    -moz-appearance: number-input;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.heart:hover {
+    cursor: pointer;
+}

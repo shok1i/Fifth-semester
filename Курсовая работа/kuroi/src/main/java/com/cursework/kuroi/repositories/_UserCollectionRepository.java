@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface _UserCollectionRepository extends JpaRepository <_UserCollection, Long> {
+    _UserCollection getCollection_ByUserId(Long userID);
 }

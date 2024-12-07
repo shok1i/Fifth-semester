@@ -5,10 +5,21 @@
             <div class="row justify-content-between mx-auto">
 
                 <div class="col-lg-6 col-md-8 col-12">
-                    <p class="text-start" style="font-size: x-large; font-weight: initial">Добавление стикера в наш
-                        альбом</p>
+                    <p class="text-start" style="font-size: x-large; font-weight: initial">Добавление стикера в наш альбом</p>
                     <p class="text-start lead">
                         Небольшие правила для добавления вашего стикера:
+                    </p>
+                    <p class="text-start lead">
+                        Загружаемые стикеры должны быть авторскими. Использование чужих работ без разрешения запрещено.
+                    </p>
+                    <p class="text-start lead">
+                        Плагиат и использование защищенных авторским правом материалов без лицензии недопустимы.
+                    </p>
+                    <p class="text-start lead">
+                        Стикеры не должны содержать материалы, нарушающие законодательство.
+                    </p class="text-start lead">
+                    <p>
+                        Следуйте этим правилам при добавлении своего стикера!
                     </p>
                 </div>
 

@@ -2,7 +2,11 @@
     <!doctype html>
     <html lang="ru">
     <head>
-        <!-- Bootstrap CSS -->
+        <title>KuroiStickers</title>
+        <link rel="shortcut icon" type="image/svg" href="/static/images/favicon.svg">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
         <!-- Bootstrap CSS -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
         <link href="/static/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -11,19 +15,14 @@
         <link href="/static/css/my_css.css" rel="stylesheet">
         <link href="/static/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
         <link href="/static/tt_norms_font/stylesheet.css" rel="stylesheet">
+        <link href="/static/css/some-css.css" rel="stylesheet">
+
 
         <!-- Bootstrap JavaScript и Popper.js -->
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
-
-        <link rel="stylesheet" href="/static/css/some-css.css">
-
-        <title>KuroiStickers</title>
-
-        <link rel="shortcut icon" type="image/svg" href="/static/images/favicon.svg">
-
-        <meta name="viewport" content="width=device-width, initial-scale=1">
     </head>
+
     <body>
 
     <nav class="navbar navbar-expand-md navbar-light mx-auto sticky-top shadow-sm h-auto" role="navigation" id="navbar"
@@ -103,10 +102,6 @@
 
     <div class="container-fluid mx-0 mb-2 py-1" style="display:block"></div>
 
-    <div>
-        <#nested/>
-    </div>
+    <#nested/>
 
-    </body>
-    </html>
 </#macro>

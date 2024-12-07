@@ -42,9 +42,9 @@ public class ArtController {
     public String userProducts(@PathVariable String nickname, Principal principal, Model model) {
         User currentUser = userService.getUserByPrinciple(principal);
 
-        if (userRepository.findByUserNickName(nickname) != null) {
-            User find = userRepository.findByUserNickName(nickname);
-            List<Art> findArts = artRepository.findByAuthorId(find.getId());
+        if (userRepository.getUser_ByUserNickName(nickname) != null) {
+            User find = userRepository.getUser_ByUserNickName(nickname);
+            List<Art> findArts = artRepository.getArts_ByAuthorId(find.getId());
 
             model.addAttribute("currentUser", currentUser);
             model.addAttribute("findUser", find);
@@ -63,7 +63,7 @@ public class ArtController {
         model.addAttribute("currentUser", artService.getUserByPrincipal(principal));
 
         model.addAttribute("art", art);
-        model.addAttribute("author", userRepository.findByUserNickName(nickname));
+        model.addAttribute("author", userRepository.getUser_ByUserNickName(nickname));
 
         return "art-info";
     }
