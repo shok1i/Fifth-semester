@@ -44,11 +44,10 @@ public class ArtController {
 
         if (userRepository.getUser_ByUserNickName(nickname) != null) {
             User find = userRepository.getUser_ByUserNickName(nickname);
-            List<Art> findArts = artRepository.getArts_ByAuthorId(find.getId());
 
             model.addAttribute("currentUser", currentUser);
             model.addAttribute("findUser", find);
-            model.addAttribute("arts", findArts);
+
             return "user-arts";
         }
 

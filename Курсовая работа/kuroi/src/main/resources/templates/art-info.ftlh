@@ -91,12 +91,17 @@
                                         <div class="row align-items-center mb-0 pb-0">
                                             <div class="col-10">
                                                 <div class="row justify-content-end">
-                                                    <form action="/addart_tocollection" method="post">
-                                                        <input type="hidden" name="_csrf" value="${_csrf.token}">
-                                                        <button type="submit" class="btn btn-outline-danger">Добавить
+                                                    <#if currentUser.id??>
+                                                        <button onclick="addToCollection(${currentUser.id}, ${art.id})"
+                                                                type="submit" class="btn btn-outline-danger">Добавить
                                                             штуку на полку
                                                         </button>
-                                                    </form>
+                                                    <#else >
+                                                        <a href="/login" class="btn btn-outline-danger">Добавить
+                                                            штуку на полку
+                                                        </a>
+                                                    </#if>
+
                                                 </div>
                                             </div>
                                         </div>

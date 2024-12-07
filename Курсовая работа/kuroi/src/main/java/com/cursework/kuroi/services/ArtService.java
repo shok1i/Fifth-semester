@@ -47,7 +47,10 @@ public class ArtService {
 
             art.setImage(image);
 
+            user.addArt(art);
+
             artRepository.save(art);
+            userRepository.save(user);
 
             return true;
         }

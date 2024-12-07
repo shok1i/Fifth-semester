@@ -4,6 +4,7 @@ import com.cursework.kuroi.services.CustomUserDetailService;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
@@ -19,16 +20,13 @@ import org.springframework.security.web.SecurityFilterChain;
 @AllArgsConstructor
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig {
-    private final CustomUserDetailService userDetailsService;
-
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests((requests) -> requests
-                        .requestMatchers("/", "/registration", "/static/**", "/images/**", "/gallery/**", "/{username}", "/{username}/{id}")
-                        .permitAll() // Доступ без аутентификации
-                        .anyRequest()
-                        .authenticated()
+                        .requestMatchers("/", "/registration", "/static/**", "/images/**", "/gallery/**", "/{username}", "/{username}/{id}").permitAll() // Доступ без аутентификации
+                        .requestMatchers("/api/**").permitAll()
+                        .anyRequest().authenticated()
                 )
                 .formLogin((form) -> form
                         .loginPage("/login").permitAll()
@@ -37,8 +35,6 @@ public class SecurityConfig {
                 .logout(logout -> logout
                         .logoutUrl("/logout")
                         .logoutSuccessUrl("/")
-                        .invalidateHttpSession(true)
-                        .deleteCookies("JSESSIONID")
                         .permitAll()
                 );
 

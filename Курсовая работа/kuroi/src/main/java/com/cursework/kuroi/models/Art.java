@@ -25,7 +25,7 @@ public class Art {
 
     @ManyToOne(cascade = CascadeType.REFRESH)
     @JoinColumn
-    private _UserCollection userCollection;
+    private UserCollection userCollection;
 
     @OneToOne(cascade = CascadeType.ALL)
     private Image image;

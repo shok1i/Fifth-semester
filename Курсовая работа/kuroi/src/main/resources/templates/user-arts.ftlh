@@ -47,21 +47,21 @@
                                             <div class="card-header position-relative">
                                                 <div class="row justify-content-start align-items-center">
                                                     <div class="col-auto px-1">
-                                                        <a href="/${art.author.userNickName}">
+                                                        <a href="/${findUser.userNickName}">
                                                             <img alt=""
                                                                  style="border-radius: 50%; height: 30px; width: 30px;"
-                                                                 src=<#if art.author.image??>"/images/${art.author.image.id}"<#else>"/static/images/profile.svg"</#if>
+                                                                 src=<#if findUser.image??>"/images/${findUser.image.id}"<#else>"/static/images/profile.svg"</#if>
                                                             >
                                                         </a>
                                                     </div>
                                                     <div class="col-auto px-0">
-                                                        <a href="/${art.author.userNickName}"
-                                                           class="text-decoration-none text-dark">${art.author.userNickName}</a>
+                                                        <a href="/${findUser.userNickName}"
+                                                           class="text-decoration-none text-dark">${findUser.userNickName}</a>
                                                     </div>
                                                 </div>
                                             </div>
 
-                                            <a href="/${art.author.userNickName}/${art.id}">
+                                            <a href="/${findUser.userNickName}/${art.id}">
                                                 <img src="/images/${art.image.id}" class="card-img-bottom no-repeat"
                                                      style="">
                                             </a>

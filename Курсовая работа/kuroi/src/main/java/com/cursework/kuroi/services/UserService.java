@@ -104,4 +104,7 @@ public class UserService {
     }
 
 
+    public User getUserById(Long userID) {
+        return userRepository.getUser_ById(userID);
+    }
 }

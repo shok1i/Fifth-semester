@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -12,13 +13,16 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "users_collections")
-public class _UserCollection {
+public class UserCollection {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "user_id", referencedColumnName = "id", unique = true)
     private User user;
 
-    @ManyToOne
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "id")
-    private List <Art> art;
+    private List<Art> arts = new ArrayList<>();
 }
