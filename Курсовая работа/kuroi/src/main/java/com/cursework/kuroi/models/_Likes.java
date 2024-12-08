@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,14 +19,23 @@ public class _Likes {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long likeID;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    private User user;
+    @ManyToMany(cascade = { CascadeType.REFRESH })
+    @JoinTable(
+            name = "LikeToUser",
+            joinColumns = { @JoinColumn(name = "userID") },
+            inverseJoinColumns = { @JoinColumn(name = "likeID") }
+    )
+    private List<User> liked_users = new ArrayList<>();
 
-    @ManyToMany(cascade = { CascadeType.ALL })
+    @ManyToMany(cascade = { CascadeType.REFRESH })
     @JoinTable(
             name = "LikeToArt",
             joinColumns = { @JoinColumn(name = "artID") },
             inverseJoinColumns = { @JoinColumn(name = "likeID") }
     )
     private List<Art> liked_arts = new ArrayList<>();
+
+
+    // Добавляем время лайка
+    private LocalDate likeDate = LocalDate.now();
 }

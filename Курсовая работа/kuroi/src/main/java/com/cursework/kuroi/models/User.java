@@ -33,9 +33,6 @@ public class User implements UserDetails {
     @OneToOne(cascade = CascadeType.ALL)
     private UserCollection userCollection;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    private _Likes likes;
-
     private String password;
 
     private boolean active;
@@ -51,8 +48,11 @@ public class User implements UserDetails {
     @JoinColumn
     private Image image;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "author")
+    @OneToMany(mappedBy = "author")
     private List<Art> arts = new ArrayList<>();
+
+    @ManyToMany(mappedBy = "liked_users")
+    private List<_Likes> likes = new ArrayList<>();
 
     // Производим инициализацию
     @PrePersist

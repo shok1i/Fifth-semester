@@ -28,8 +28,8 @@ public class ArtController {
 
     // Обработка GET-запросов
     @GetMapping("/gallery")
-    public String products(@RequestParam(name = "searchWord", required = false) String title, Principal principal, Model model) {
-        model.addAttribute("arts", artService.getArtsByKeyword(title));
+    public String products(@RequestParam(name = "searchWord", required = false) String title, @RequestParam(name = "days", required = false) Long days, Principal principal, Model model) {
+        model.addAttribute("arts", artService.getArts(title, days));
         model.addAttribute("currentUser", artService.getUserByPrincipal(principal));
         model.addAttribute("searchWord", title);
 

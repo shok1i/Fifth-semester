@@ -38,10 +38,6 @@ public class UserService {
         userCollection.setUser(user);
         user.setUserCollection(userCollection);
 
-        _Likes likes = new _Likes();
-        likes.setUser(user);
-        user.setLikes(likes);
-
         userRepository.save(user);
         return true;
     }

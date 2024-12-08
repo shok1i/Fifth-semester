@@ -39,11 +39,13 @@ function toggleLike(action, userID, artID) {
         .then(response => response.text())
         .then(data => {
             console.log(data);
-            const like = document.getElementById('likesDiv');
+            const card = document.getElementById('CARD' + artID)
+
+            const like = card.querySelector('#likesDiv');
             like.classList.toggle('liked', isAdding);
             like.setAttribute('onclick', `toggleLike('${isAdding ? 'DELETE' : 'POST'}', ${userID}, ${artID})`);
 
-            const likesCount = document.getElementById('likesCount');
+            const likesCount = card.querySelector('#likesCount');
             const value = parseInt(likesCount.textContent);
             likesCount.textContent = isAdding ? value + 1 : value - 1;
         })

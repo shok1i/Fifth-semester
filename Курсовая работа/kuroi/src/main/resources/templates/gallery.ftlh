@@ -12,10 +12,10 @@
 
                                     <h5>Популярные стикеры</h5>
 
-                                    <a class="text-danger text-decoration-none" href="/gallery">За неделю </a> /
-                                    <a class="text-danger text-decoration-none" href="/gallery">За месяц </a> /
-                                    <a class="text-danger text-decoration-none" href="/gallery">За год </a> /
-                                    <a class="text-danger text-decoration-none" href="/gallery">За всё время</a>
+                                    <a class="text-danger text-decoration-none" href="/gallery?searchWord=<#if searchWord??>${searchWord}<#else></#if>&days=7">За неделю </a> /
+                                    <a class="text-danger text-decoration-none" href="/gallery?searchWord=<#if searchWord??>${searchWord}<#else></#if>&days=30">За месяц </a> /
+                                    <a class="text-danger text-decoration-none" href="/gallery?searchWord=<#if searchWord??>${searchWord}<#else></#if>&days=365">За год </a> /
+                                    <a class="text-danger text-decoration-none" href="/gallery?searchWord=<#if searchWord??>${searchWord}<#else></#if>">За всё время</a>
 
                                 </div>
                             </div>
@@ -42,7 +42,7 @@
                                         <#if arts?size != 0>
                                             <#list arts as art>
                                                 <div class="col-6 col-md-6 col-lg-4 col-xl-3 posts__post post mt-2 post_active">
-                                                    <div class="card">
+                                                    <div id="CARD${art.artID}" class="card">
                                                         <div class="card-header position-relative">
                                                             <div class="row justify-content-start align-items-center">
                                                                 <div class="col-auto px-1">
@@ -82,11 +82,13 @@
                                 <#if currentUser.userID??>
                                     <#assign isAdding = true>
                                     <#if currentUser.likes??>
-                                        <#list currentUser.likes.liked_arts as temp>
-                                            <#if temp.artID == art.artID>
-                                                <#assign isAdding = false>
-                                                <#break>
-                                            </#if>
+                                        <#list currentUser.likes as likesArray>
+                                            <#list likesArray.liked_arts as temp>
+                                                <#if temp.artID == art.artID>
+                                                    <#assign isAdding = false>
+                                                    <#break>
+                                                </#if>
+                                            </#list>
                                         </#list>
                                     </#if>
 

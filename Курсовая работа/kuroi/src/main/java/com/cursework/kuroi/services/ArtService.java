@@ -7,11 +7,13 @@ import com.cursework.kuroi.repositories.ArtRepository;
 import com.cursework.kuroi.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.security.Principal;
+import java.time.LocalDate;
 import java.util.List;
 
 @Slf4j
@@ -21,9 +23,36 @@ public class ArtService {
     private final ArtRepository artRepository;
     private final UserRepository userRepository;
 
-    public List<Art> getArtsByKeyword(String keyword) {
-        if (keyword != null) return artRepository.getArts_ByKeyword(keyword);
-        return artRepository.findAll();
+    public List<Art> getArts(String keyword, Long date) {
+        Specification<Art> spec = Specification.where(null);
+
+        // Добавляем условия по ключевому слову, если оно передано
+        if (keyword != null) {
+            spec = spec.and((root, query, criteriaBuilder) ->
+                    criteriaBuilder.or(
+                            criteriaBuilder.like(root.get("title"), "%" + keyword + "%"),
+                            criteriaBuilder.like(root.get("description"), "%" + keyword + "%"),
+                            criteriaBuilder.like(root.get("author").get("userNickName"), "%" + keyword + "%")
+                    )
+            );
+        }
+
+        // Добавляем условия по дате, если она передана
+        if (date != null) {
+            LocalDate filterDate = LocalDate.now().minusDays(date);
+            spec = spec.and((root, query, criteriaBuilder) ->
+                    criteriaBuilder.greaterThanOrEqualTo(root.get("publishDate"), filterDate)
+            );
+        }
+
+        spec = spec.and((root, query, criteriaBuilder) -> {
+            assert query != null;
+            query.orderBy(criteriaBuilder.desc(criteriaBuilder.size(root.get("likes"))));
+            return criteriaBuilder.conjunction();
+        });
+
+        // Выполняем запрос с построенной спецификацией
+        return artRepository.findAll(spec);
     }
 
     public Art getArtById(Long id) {
