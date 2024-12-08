@@ -77,22 +77,37 @@ public class UserService {
     }
 
     @Transactional
-    public boolean changeUserInformation(Principal principal, String userBIO, String userNickName, MultipartFile file) throws IOException {
+    public boolean changeUserInformation(Principal principal, String userBIO, String userNickName, MultipartFile userImageFile, MultipartFile userBannerImage) throws IOException {
         User userFromDB = userRepository.getUser_ByUserEmail(getUserByPrinciple(principal).getUserEmail());
 
         // Изменение фото, если есть
-        if (file.getSize() != 0) {
+        if (userImageFile.getSize() != 0) {
             Image image = new Image();
             if (userFromDB.getImage() != null)
                 image = imageRepository.findById(userFromDB.getImage().getImageID()).orElse(null);
 
             image.setPath("img" + image.getImageID());
-            image.setContentType(file.getContentType());
-            image.setSize(file.getSize());
-            image.setBytes(file.getBytes());
-            image.setUser(userFromDB);
+            image.setContentType(userImageFile.getContentType());
+            image.setSize(userImageFile.getSize());
+            image.setBytes(userImageFile.getBytes());
+            image.setUserAvatar(userFromDB);
 
             userFromDB.setImage(image);
+        }
+
+        // Изменение фото, если есть
+        if (userBannerImage.getSize() != 0) {
+            Image image = new Image();
+            if (userFromDB.getBanner() != null)
+                image = imageRepository.findById(userFromDB.getBanner().getImageID()).orElse(null);
+
+            image.setPath("img" + image.getImageID());
+            image.setContentType(userBannerImage.getContentType());
+            image.setSize(userBannerImage.getSize());
+            image.setBytes(userBannerImage.getBytes());
+            image.setUserBanner(userFromDB);
+
+            userFromDB.setBanner(image);
         }
 
         if (userRepository.getUser_ByUserNickName(userNickName) == null || Objects.equals(userFromDB.getUserNickName(), userNickName))

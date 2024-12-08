@@ -12,10 +12,18 @@
 
                                     <h5>Популярные стикеры</h5>
 
-                                    <a class="text-danger text-decoration-none" href="/gallery?searchWord=<#if searchWord??>${searchWord}<#else></#if>&days=7">За неделю </a> /
-                                    <a class="text-danger text-decoration-none" href="/gallery?searchWord=<#if searchWord??>${searchWord}<#else></#if>&days=30">За месяц </a> /
-                                    <a class="text-danger text-decoration-none" href="/gallery?searchWord=<#if searchWord??>${searchWord}<#else></#if>&days=365">За год </a> /
-                                    <a class="text-danger text-decoration-none" href="/gallery?searchWord=<#if searchWord??>${searchWord}<#else></#if>">За всё время</a>
+                                    <a class="text-danger text-decoration-none"
+                                       href="/gallery?searchWord=<#if searchWord??>${searchWord}<#else></#if>&days=7">За
+                                        неделю </a> /
+                                    <a class="text-danger text-decoration-none"
+                                       href="/gallery?searchWord=<#if searchWord??>${searchWord}<#else></#if>&days=30">За
+                                        месяц </a> /
+                                    <a class="text-danger text-decoration-none"
+                                       href="/gallery?searchWord=<#if searchWord??>${searchWord}<#else></#if>&days=365">За
+                                        год </a> /
+                                    <a class="text-danger text-decoration-none"
+                                       href="/gallery?searchWord=<#if searchWord??>${searchWord}<#else></#if>">За всё
+                                        время</a>
 
                                 </div>
                             </div>
@@ -73,7 +81,7 @@
                                                                         <div class="col-8"><span>${art.title}</span>
                                                                         </div>
                                                                         <div class="col-4 text-end align-self-start">
-                                                                            <div class="">
+
                                                                                     <span
                                                                                             class="d-block"
                                                                                             style="white-space: nowrap;">
@@ -107,7 +115,6 @@
                                     </a>
                                 </#if>
                                                                                     </span>
-                                                                            </div>
                                                                         </div>
                                                                     </div>
                                                                 </div>

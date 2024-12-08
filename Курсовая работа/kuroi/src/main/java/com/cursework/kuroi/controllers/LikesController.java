@@ -4,7 +4,7 @@ import com.cursework.kuroi.models.Art;
 import com.cursework.kuroi.models.User;
 import com.cursework.kuroi.services.ArtService;
 import com.cursework.kuroi.services.UserService;
-import com.cursework.kuroi.services._LikesService;
+import com.cursework.kuroi.services.LikesService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Slf4j
 @Controller
 @RequiredArgsConstructor
-public class _LikesController {
-    private final _LikesService likesService;
+public class LikesController {
+    private final LikesService likesService;
     private final UserService userService;
     private final ArtService artService;
 

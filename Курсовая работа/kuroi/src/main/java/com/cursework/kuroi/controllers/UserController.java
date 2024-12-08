@@ -87,10 +87,10 @@ public class UserController {
     }
 
     @PostMapping("/account/edit")
-    public String editUser(Principal principal, String userBIO, String userNickName, MultipartFile file, Model model) throws IOException {
+    public String editUser(Principal principal, String userBIO, String userNickName, MultipartFile userAvatar, Model model, MultipartFile userBanner) throws IOException {
         model.addAttribute("currentUser", userService.getUserByPrinciple(principal));
 
-        if (userService.changeUserInformation(principal, userBIO, userNickName, file)) {
+        if (userService.changeUserInformation(principal, userBIO, userNickName, userAvatar, userBanner)) {
             return "redirect:/account";
         }
 

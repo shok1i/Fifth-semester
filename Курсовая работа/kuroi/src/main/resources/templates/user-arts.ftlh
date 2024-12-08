@@ -4,7 +4,7 @@
 
 
         <div class="rounded-top"
-             style="height: 333px; width: 100%; background: url('/static/images/profile-back.jpg') no-repeat center center; background-size: cover;)">
+             style="height: 333px; width: 100%; background: url(<#if findUser.banner??>'/images/${findUser.banner.imageID}'<#else>'/static/images/profile-back.jpg'</#if>) no-repeat center center; background-size: cover;)">
         </div>
 
 

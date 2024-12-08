@@ -4,7 +4,7 @@
         <div class="col-sm-12 col-md-8 col-lg-6">
             <div class="card shadow p-0 rounded-3">
                 <div class="container rounded-top position-relative"
-                     style="background: url('/static/images/profile-back.jpg') no-repeat center center; background-size: cover">
+                     style="background: url(<#if currentUser.banner??>'/images/${currentUser.banner.imageID}'<#else>'/static/images/profile-back.jpg'</#if>) no-repeat center center; background-size: cover">
                     <div class="mb-3 text-center py-5">
                         <div class="container" id="avatar"
                              style="display: inline-block; border-radius: 50%; border: 10px solid #6cabd9; width: 20rem; height: 20rem;
@@ -30,7 +30,13 @@
                         <p>
                             <span class="h5" style="color: #6cabd9">Аватар</span>
                             <br>
-                            <input type="file" name="file" class="form-control form-control-sm" id="id_avatar">
+                            <input type="file" name="userAvatar" class="form-control form-control-sm">
+                        </p>
+
+                        <p>
+                            <span class="h5" style="color: #6cabd9">Баннер</span>
+                            <br>
+                            <input type="file" name="userBanner" class="form-control form-control-sm">
                         </p>
 
                         <p>
@@ -43,12 +49,8 @@
                         <p>
                             <span class="h5" style="color: #6cabd9">Никнейм</span>
                             <br>
-                            <input type="text" name="userNickName" value="${currentUser.userNickName}"
-                                   class="form-control mb-3"
-                                   maxlength="64" id="id_userNickName">
-                        <div class="<#if errorMessage??>d-flex<#else>d-none</#if> text-danger">Такой никнейм уже
-                            используется!
-                        </div>
+                            <input type="text" name="userNickName" value="${currentUser.userNickName}" class="form-control mb-3">
+                            <div class="<#if errorMessage??>d-flex<#else>d-none</#if> text-danger">Такой никнейм уже используется!</div>
                         </p>
 
                         <div class="row justify-content-between pt-3">

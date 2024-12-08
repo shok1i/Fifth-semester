@@ -2,7 +2,7 @@ package com.cursework.kuroi.controllers;
 
 import com.cursework.kuroi.models.Art;
 import com.cursework.kuroi.models.User;
-import com.cursework.kuroi.repositories.ArtRepository;
+import com.cursework.kuroi.models.Likes;
 import com.cursework.kuroi.repositories.UserRepository;
 import com.cursework.kuroi.services.ArtService;
 import com.cursework.kuroi.services.UserService;
@@ -17,6 +17,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.security.Principal;
+import java.time.LocalDate;
+import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
@@ -29,7 +31,20 @@ public class ArtController {
     // Обработка GET-запросов
     @GetMapping("/gallery")
     public String products(@RequestParam(name = "searchWord", required = false) String title, @RequestParam(name = "days", required = false) Long days, Principal principal, Model model) {
-        model.addAttribute("arts", artService.getArts(title, days));
+        List<Art> arts = artService.getArts(title, days); // Получаем список объектов Art
+
+        if (days != null) {
+            LocalDate filterLikeDate = LocalDate.now().minusDays(days); // Рассчитываем дату для фильтрации
+
+            // Фильтруем лайки внутри каждого объекта Art
+            arts.forEach(art -> {
+                List<Likes> likes = art.getLikes(); // Получаем список лайков для конкретного Art
+                likes.removeIf(like -> like.getLikeDate().isBefore(filterLikeDate)); // Удаляем лайки, сделанные до определенной даты
+            });
+        }
+
+        // Добавляем отфильтрованный список arts в модель
+        model.addAttribute("arts", arts);
         model.addAttribute("currentUser", artService.getUserByPrincipal(principal));
         model.addAttribute("searchWord", title);
 

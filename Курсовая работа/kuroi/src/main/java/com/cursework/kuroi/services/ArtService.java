@@ -45,6 +45,7 @@ public class ArtService {
             );
         }
 
+        // сортировка по размеру списка Likes
         spec = spec.and((root, query, criteriaBuilder) -> {
             assert query != null;
             query.orderBy(criteriaBuilder.desc(criteriaBuilder.size(root.get("likes"))));

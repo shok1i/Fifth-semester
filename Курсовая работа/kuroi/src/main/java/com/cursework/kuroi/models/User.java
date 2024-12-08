@@ -48,11 +48,15 @@ public class User implements UserDetails {
     @JoinColumn
     private Image image;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn
+    private Image banner;
+
     @OneToMany(mappedBy = "author")
     private List<Art> arts = new ArrayList<>();
 
     @ManyToMany(mappedBy = "liked_users")
-    private List<_Likes> likes = new ArrayList<>();
+    private List<Likes> likes = new ArrayList<>();
 
     // Производим инициализацию
     @PrePersist

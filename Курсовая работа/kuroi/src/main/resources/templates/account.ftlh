@@ -4,7 +4,7 @@
         <div class="col-sm-12 col-md-8 col-lg-6">
             <div class="card shadow p-0 rounded-3">
                 <div class="container rounded-top position-relative"
-                     style="background: url('/static/images/profile-back.jpg') no-repeat center center; background-size: cover">
+                     style="background: url(<#if currentUser.banner??>'/images/${currentUser.banner.imageID}'<#else>'/static/images/profile-back.jpg'</#if>) no-repeat center center; background-size: cover">
                     <div class="mb-3 text-center py-5">
                         <div class="container" id="avatar"
                              style="display: inline-block; border-radius: 50%; border: 10px solid #6cabd9; width: 20rem; height: 20rem;

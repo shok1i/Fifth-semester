@@ -2,8 +2,8 @@ package com.cursework.kuroi.services;
 
 import com.cursework.kuroi.models.Art;
 import com.cursework.kuroi.models.User;
-import com.cursework.kuroi.models._Likes;
-import com.cursework.kuroi.repositories._LikesRepository;
+import com.cursework.kuroi.models.Likes;
+import com.cursework.kuroi.repositories.LikesRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -11,11 +11,11 @@ import org.springframework.stereotype.Service;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class _LikesService {
-    private final _LikesRepository likesRepository;
+public class LikesService {
+    private final LikesRepository likesRepository;
 
     public void addLike(User user, Art art) {
-        _Likes likes = new _Likes();
+        Likes likes = new Likes();
 
         likes.getLiked_users().add(user);
         likes.getLiked_arts().add(art);
@@ -27,7 +27,7 @@ public class _LikesService {
     }
 
     public void deleteLike(User user, Art art) {
-        _Likes likes = likesRepository.getLikeByUserAndArt(user.getUserID(), art.getArtID());
+        Likes likes = likesRepository.getLikeByUserAndArt(user.getUserID(), art.getArtID());
 
         if (likes != null) {
             likesRepository.delete(likes);

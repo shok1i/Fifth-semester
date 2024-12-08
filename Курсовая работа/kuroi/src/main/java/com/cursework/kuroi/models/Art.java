@@ -29,7 +29,7 @@ public class Art {
     private List<UserCollection> userCollections = new ArrayList<>();
 
     @ManyToMany(mappedBy = "liked_arts")
-    private List<_Likes> likes = new ArrayList<>();
+    private List<Likes> likes = new ArrayList<>();
 
     @OneToOne(cascade = CascadeType.ALL)
     private Image image;

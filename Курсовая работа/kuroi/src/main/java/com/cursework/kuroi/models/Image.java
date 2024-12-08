@@ -29,6 +29,8 @@ public class Image {
     private Art art;
 
     @OneToOne(cascade = CascadeType.REFRESH)
-    @JoinColumn
-    private User user;
+    private User userAvatar;
+
+    @OneToOne(cascade = CascadeType.REFRESH)
+    private User userBanner;
 }
