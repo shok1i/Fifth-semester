@@ -6,6 +6,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @Entity
@@ -15,7 +17,7 @@ import java.time.LocalDate;
 public class Art {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long artID;
 
     private String title;
 
@@ -23,9 +25,11 @@ public class Art {
     @JoinColumn
     private User author;
 
-    @ManyToOne(cascade = CascadeType.REFRESH)
-    @JoinColumn
-    private UserCollection userCollection;
+    @ManyToMany(mappedBy = "collections_arts")
+    private List<UserCollection> userCollections = new ArrayList<>();
+
+    @ManyToMany(mappedBy = "liked_arts")
+    private List<_Likes> likes = new ArrayList<>();
 
     @OneToOne(cascade = CascadeType.ALL)
     private Image image;

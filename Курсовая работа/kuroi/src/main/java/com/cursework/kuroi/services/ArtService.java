@@ -39,7 +39,7 @@ public class ArtService {
 
             art.setAuthor(user);
 
-            image.setPath("img" + image.getId());
+            image.setPath("img" + image.getImageID());
             image.setContentType(file.getContentType());
             image.setSize(file.getSize());
             image.setBytes(file.getBytes());
@@ -60,7 +60,7 @@ public class ArtService {
     public boolean deleteArt(Principal principal, Long id) {
         Art tempArt = artRepository.findById(id).orElse(null);
         User tempUser = getUserByPrincipal(principal);
-        if (tempArt != null && tempUser != null && tempArt.getAuthor().getId().equals(tempUser.getId())) {
+        if (tempArt != null && tempUser != null && tempArt.getAuthor().getUserID().equals(tempUser.getUserID())) {
             artRepository.deleteById(id);
             return true;
         }

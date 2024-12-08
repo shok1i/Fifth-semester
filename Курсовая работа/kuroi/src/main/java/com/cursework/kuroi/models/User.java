@@ -20,7 +20,7 @@ import java.util.*;
 public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long userID;
 
     private String userBIO;
 
@@ -29,6 +29,12 @@ public class User implements UserDetails {
 
     @Column(unique = true)
     private String userEmail;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    private UserCollection userCollection;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    private _Likes likes;
 
     private String password;
 
@@ -52,8 +58,6 @@ public class User implements UserDetails {
     @PrePersist
     private void init() {
         createAt = LocalDate.now();
-        if (userBIO == null) userBIO = "id" + id;
-        if (userNickName == null) userNickName = "id" + id;
     }
 
     // Методы SpringSecurity

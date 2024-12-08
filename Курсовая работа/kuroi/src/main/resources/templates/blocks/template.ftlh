@@ -21,7 +21,9 @@
         <!-- Bootstrap JavaScript и Popper.js -->
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
-        <script src="/static/java-script/some-java-script.js"></script>
+        <script src="/static/java-script/some-java-script.js" defer></script>
+
+        <meta name="_csrf" content="${_csrf.token}">
     </head>
 
     <body>
@@ -57,7 +59,7 @@
                             <img alt="" class="circle" height="40px" width="40px"
                                  style="max-height: 40px; max-width: 40px; border-radius:50%"
 
-                                 src=<#if currentUser.image??>"/images/${currentUser.image.id}"<#else>"/static/images/profile.svg"</#if>
+                                 src=<#if currentUser.image??>"/images/${currentUser.image.imageID}"<#else>"/static/images/profile.svg"</#if>
                             >
                         </a>
 

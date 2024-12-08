@@ -17,13 +17,11 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.security.Principal;
-import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
 public class ArtController {
     private final ArtService artService;
-    private final ArtRepository artRepository;
 
     private final UserService userService;
     private final UserRepository userRepository;
@@ -64,6 +62,14 @@ public class ArtController {
         model.addAttribute("art", art);
         model.addAttribute("author", userRepository.getUser_ByUserNickName(nickname));
 
+        if (userRepository.getUser_ByUserNickName(nickname) != null) {
+            if (userRepository.getUser_ByUserNickName(nickname).getUserCollection().getCollections_arts().contains(art)) {
+                model.addAttribute("isContain", true);
+                return "art-info";
+            }
+        }
+
+        model.addAttribute("isContain", false);
         return "art-info";
     }
 

@@ -6,13 +6,17 @@ import com.cursework.kuroi.repositories.ArtRepository;
 import com.cursework.kuroi.repositories.ImageRepository;
 import com.cursework.kuroi.repositories.UserRepository;
 import com.cursework.kuroi.services.UserService;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.context.HttpSessionSecurityContextRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -73,7 +77,7 @@ public class UserController {
     //  Сделать так что бы после регистрации у нас был автоматический вход
     //  Сделать возвращаемое значение метода addUser на Long|String и т.п. что бы ловить код ошибки при регистрации (такой никнейм уже есть такой емаил уже есть) ТОЖЕ САМОЕ СДЕЛАТЬ В ЛОГИНЕ
     @PostMapping("/registration")
-    public String createUser(User user, Model model) {
+    public String createUser(User user, Model model, HttpServletRequest request) {
         if (!userService.addUser(user)) {
             model.addAttribute("errorMessage", "Пользователь с email: " + user.getUserEmail() + " уже существует");
             return "registration";
@@ -84,7 +88,6 @@ public class UserController {
 
     @PostMapping("/account/edit")
     public String editUser(Principal principal, String userBIO, String userNickName, MultipartFile file, Model model) throws IOException {
-        log.info("String userBIO {}, String userNickName {}", userBIO, userNickName);
         model.addAttribute("currentUser", userService.getUserByPrinciple(principal));
 
         if (userService.changeUserInformation(principal, userBIO, userNickName, file)) {

@@ -12,20 +12,20 @@ import java.util.List;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "users_collections")
-public class UserCollection {
+@Table(name = "users_likes")
+public class _Likes {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long collectionID;
+    private Long likeID;
 
     @OneToOne(cascade = CascadeType.ALL)
     private User user;
 
     @ManyToMany(cascade = { CascadeType.ALL })
     @JoinTable(
-            name = "CollectionToArt",
+            name = "LikeToArt",
             joinColumns = { @JoinColumn(name = "artID") },
-            inverseJoinColumns = { @JoinColumn(name = "collectionID") }
+            inverseJoinColumns = { @JoinColumn(name = "likeID") }
     )
-    private List<Art> collections_arts = new ArrayList<>();
+    private List<Art> liked_arts = new ArrayList<>();
 }

@@ -25,7 +25,6 @@ public class SecurityConfig {
         http
                 .authorizeHttpRequests((requests) -> requests
                         .requestMatchers("/", "/registration", "/static/**", "/images/**", "/gallery/**", "/{username}", "/{username}/{id}").permitAll() // Доступ без аутентификации
-                        .requestMatchers("/api/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .formLogin((form) -> form
@@ -36,6 +35,11 @@ public class SecurityConfig {
                         .logoutUrl("/logout")
                         .logoutSuccessUrl("/")
                         .permitAll()
+                )
+                .exceptionHandling(exception -> exception
+                        .authenticationEntryPoint((request, response, authException) -> {
+                            response.sendRedirect("/login"); // Ловим ошибку: "Пользователь не авторизован"
+                        })
                 );
 
         return http.build();

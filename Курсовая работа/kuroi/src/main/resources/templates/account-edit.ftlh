@@ -8,7 +8,7 @@
                     <div class="mb-3 text-center py-5">
                         <div class="container" id="avatar"
                              style="display: inline-block; border-radius: 50%; border: 10px solid #6cabd9; width: 20rem; height: 20rem;
-                                     background: <#if currentUser.image??> url('/images/${currentUser.image.id}')
+                                     background: <#if currentUser.image??> url('/images/${currentUser.image.imageID}')
                                      <#else>url('/static/images/profile.svg')</#if> no-repeat center center; background-size: cover">
                         </div>
                     </div>

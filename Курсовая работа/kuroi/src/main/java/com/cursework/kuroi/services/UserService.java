@@ -1,7 +1,6 @@
 package com.cursework.kuroi.services;
 
-import com.cursework.kuroi.models.Image;
-import com.cursework.kuroi.models.User;
+import com.cursework.kuroi.models.*;
 import com.cursework.kuroi.models.enums.Role;
 import com.cursework.kuroi.repositories.ImageRepository;
 import com.cursework.kuroi.repositories.UserRepository;
@@ -35,6 +34,14 @@ public class UserService {
         user.getRoles().add(Role.ROLE_USER);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
 
+        UserCollection userCollection = new UserCollection();
+        userCollection.setUser(user);
+        user.setUserCollection(userCollection);
+
+        _Likes likes = new _Likes();
+        likes.setUser(user);
+        user.setLikes(likes);
+
         userRepository.save(user);
         return true;
     }
@@ -44,7 +51,7 @@ public class UserService {
         return userRepository.findAll();
     }
 
-    public Object getAll() {
+    public List<User> getAll() {
         return userRepository.findAll();
     }
 
@@ -81,9 +88,9 @@ public class UserService {
         if (file.getSize() != 0) {
             Image image = new Image();
             if (userFromDB.getImage() != null)
-                image = imageRepository.findById(userFromDB.getImage().getId()).orElse(null);
+                image = imageRepository.findById(userFromDB.getImage().getImageID()).orElse(null);
 
-            image.setPath("img" + image.getId());
+            image.setPath("img" + image.getImageID());
             image.setContentType(file.getContentType());
             image.setSize(file.getSize());
             image.setBytes(file.getBytes());
@@ -105,6 +112,6 @@ public class UserService {
 
 
     public User getUserById(Long userID) {
-        return userRepository.getUser_ById(userID);
+        return userRepository.getUser_ByUserID(userID);
     }
 }

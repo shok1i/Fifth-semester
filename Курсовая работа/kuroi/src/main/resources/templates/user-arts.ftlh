@@ -19,7 +19,7 @@
 
                         <img width="180" height="180" class="rounded-circle"
                              style="border: 0.3rem solid #6cabd9; background-color: #6cabd9;"
-                             src=<#if findUser.image??>"/images/${findUser.image.id}"<#else>"/static/images/profile.svg"</#if>
+                             src=<#if findUser.image??>"/images/${findUser.image.imageID}"<#else>"/static/images/profile.svg"</#if>
                         >
 
 
@@ -50,7 +50,7 @@
                                                         <a href="/${findUser.userNickName}">
                                                             <img alt=""
                                                                  style="border-radius: 50%; height: 30px; width: 30px;"
-                                                                 src=<#if findUser.image??>"/images/${findUser.image.id}"<#else>"/static/images/profile.svg"</#if>
+                                                                 src=<#if findUser.image??>"/images/${findUser.image.imageID}"<#else>"/static/images/profile.svg"</#if>
                                                             >
                                                         </a>
                                                     </div>
@@ -61,8 +61,8 @@
                                                 </div>
                                             </div>
 
-                                            <a href="/${findUser.userNickName}/${art.id}">
-                                                <img src="/images/${art.image.id}" class="card-img-bottom no-repeat"
+                                            <a href="/${findUser.userNickName}/${art.artID}">
+                                                <img src="/images/${art.image.imageID}" class="card-img-bottom no-repeat"
                                                      style="">
                                             </a>
 

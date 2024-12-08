@@ -10,12 +10,10 @@ import java.util.List;
 
 @Repository
 public interface ArtRepository extends JpaRepository<Art, Long> {
-    Art getArt_ById(Long artId);
-    List<Art> getArts_ByAuthorId(Long id);
+    Art getByArtID(Long artId);
+    List<Art> getByAuthorUserID(Long id);
 
     // Запрос в SQL аблицу для поиска по содержанию слова в названии, описании или в авторе
     @Query("SELECT p FROM Art p WHERE p.title LIKE %:keyword% OR p.description LIKE %:keyword% OR p.author.userNickName LIKE %:keyword%")
     List<Art> getArts_ByKeyword(@Param("keyword") String keyword);
-
-
 }
