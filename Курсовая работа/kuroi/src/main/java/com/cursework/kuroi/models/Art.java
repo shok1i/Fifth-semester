@@ -32,7 +32,7 @@ public class Art {
     private List<Likes> likes = new ArrayList<>();
 
     @ManyToMany(mappedBy = "arts")
-    private List<_Order> arts = new ArrayList<>();
+    private List<Order> arts = new ArrayList<>();
 
     @OneToOne(cascade = CascadeType.ALL)
     private Image image;

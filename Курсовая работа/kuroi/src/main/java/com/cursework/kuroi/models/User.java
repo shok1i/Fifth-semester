@@ -59,7 +59,7 @@ public class User implements UserDetails {
     private List<Likes> likes = new ArrayList<>();
 
     @OneToMany(mappedBy = "user")
-    private List<_Order> orders = new ArrayList<>();
+    private List<Order> orders = new ArrayList<>();
 
     // Производим инициализацию
     @PrePersist

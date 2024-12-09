@@ -4,9 +4,7 @@ import com.cursework.kuroi.models.Art;
 import com.cursework.kuroi.models.User;
 import com.cursework.kuroi.services.ArtService;
 import com.cursework.kuroi.services.UserService;
-import com.cursework.kuroi.services._OrderService;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
+import com.cursework.kuroi.services.OrderService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -22,10 +20,10 @@ import java.util.List;
 @Slf4j
 @Controller
 @RequiredArgsConstructor
-public class _OrderController {
+public class OrderController {
     private final UserService userService;
     private final ArtService artService;
-    private final _OrderService orderService;
+    private final OrderService orderService;
 
     @GetMapping("/order/list")
     public String orderList(Model model,  Principal principal) {

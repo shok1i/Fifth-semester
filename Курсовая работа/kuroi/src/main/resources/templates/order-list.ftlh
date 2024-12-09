@@ -19,7 +19,7 @@
                                 <div class="col-2 d-none d-lg-block"><span style="font-weight: bold">Стоимость</span>
                                 </div>
                                 <div class="col-3"><span style="font-weight: bold">Статус</span></div>
-                                <div class="col-3 col-lg-2"><span style="font-weight: bold">Обзор</span></div>
+
                             </div>
 
                             <#list orderList as order>
@@ -29,9 +29,6 @@
                                     <div class="col-2 d-none d-lg-block">${order.price} ₽</div>
                                     <div class="col-3">
                                         <span>${order.orderStatus}</span>
-                                    </div>
-                                    <div class="col-3 col-lg-2">
-                                        <a href="/order/${order.orderID}" class="text-dark">Перейти</a>
                                     </div>
                                 </div>
                             </#list>

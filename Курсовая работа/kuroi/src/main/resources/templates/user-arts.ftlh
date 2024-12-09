@@ -67,16 +67,51 @@
                                             </a>
 
                                             <div class="card-body">
-                                                <div class="row justify-content-between">
-                                                    <div class="col">
-                                                        <div class="row justify-content-between">
-                                                            <div class="col-8">
-                                                                <span>${art.title}</span>
+                                                            <div class="row justify-content-between">
+                                                                <div class="col">
+                                                                    <div class="row justify-content-between">
+                                                                        <div class="col-8"><span>${art.title}</span>
+                                                                        </div>
+                                                                        <div class="col-4 text-end align-self-start">
+
+                                                                                    <span
+                                                                                            class="d-block"
+                                                                                            style="white-space: nowrap;">
+                                                                                        <span class="text-like me-1"
+                                                                                              id="likesCount">${art.likes?size}</span>
+                                <#if currentUser.userID??>
+                                    <#assign isAdding = true>
+                                    <#if currentUser.likes??>
+                                        <#list currentUser.likes as likesArray>
+                                            <#list likesArray.liked_arts as temp>
+                                                <#if temp.artID == art.artID>
+                                                    <#assign isAdding = false>
+                                                    <#break>
+                                                </#if>
+                                            </#list>
+                                        </#list>
+                                    </#if>
+
+                                    <#assign actionUrl = isAdding?string("toggleLike('POST'", "toggleLike('DELETE'")>
+                                    <#assign likeStyle = isAdding?string(" ", "liked")>
+
+                                    <svg id="likesDiv" onclick="${actionUrl}, ${currentUser.userID}, ${art.artID})"
+                                         class="heart ${likeStyle}" viewBox="0 0 1546.02 1347.49">
+                                        <path d="M1515.78,257.58A412.62,412.62,0,0,1,1425.06,705L789.31,1340.73a23,23,0,0,1-32.61,0L121,705A413,413,0,1,1,705,121l68,68,68-68a413.2,413.2,0,0,1,674.75,136.62Z"></path>
+                                    </svg>
+                                <#else>
+                                    <a href="/login">
+                                        <svg class="heart" viewBox="0 0 1546.02 1347.49">
+                                            <path d="M1515.78,257.58A412.62,412.62,0,0,1,1425.06,705L789.31,1340.73a23,23,0,0,1-32.61,0L121,705A413,413,0,1,1,705,121l68,68,68-68a413.2,413.2,0,0,1,674.75,136.62Z"></path>
+                                        </svg>
+                                    </a>
+                                </#if>
+                                                                                    </span>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                </div>
-                                            </div>
                                         </div>
                                     </div>
                                 </#list>
