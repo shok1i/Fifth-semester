@@ -45,7 +45,7 @@
                                                     <a href="/${art.author.userNickName}/${art.artID}">
                                                         <img src="/images/${art.image.imageID}"
                                                              class="card-img-bottom no-repeat"
-                                                             style="">
+                                                             style="max-height: 230px; object-fit: contain; ">
                                                     </a>
 
                                                     <div class="card-body">

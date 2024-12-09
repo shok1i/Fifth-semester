@@ -15,6 +15,8 @@ import java.io.IOException;
 import java.security.Principal;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Service
@@ -100,5 +102,14 @@ public class ArtService {
     public User getUserByPrincipal(Principal principal) {
         if (principal == null) return new User();
         return userRepository.getUser_ByUserEmail(principal.getName());
+    }
+
+    public List<Art> findArtsByIds(List<Long> artIds) {
+        // Преобразуем список ID в список объектов Art
+        return artIds.stream()
+                .map(artRepository::findById) // Поиск по каждому ID
+                .filter(Optional::isPresent) // Убираем отсутствующие элементы
+                .map(Optional::get) // Получаем объекты из Optional
+                .collect(Collectors.toList());
     }
 }

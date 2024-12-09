@@ -24,6 +24,7 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests((requests) -> requests
+                        .requestMatchers("/addart", "/collection", "/order/**", "/api/**").authenticated()
                         .requestMatchers("/", "/registration", "/static/**", "/images/**", "/gallery/**", "/{username}", "/{username}/{id}").permitAll() // Доступ без аутентификации
                         .anyRequest().authenticated()
                 )

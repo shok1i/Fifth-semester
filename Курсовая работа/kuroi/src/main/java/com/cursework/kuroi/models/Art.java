@@ -31,6 +31,9 @@ public class Art {
     @ManyToMany(mappedBy = "liked_arts")
     private List<Likes> likes = new ArrayList<>();
 
+    @ManyToMany(mappedBy = "arts")
+    private List<_Order> arts = new ArrayList<>();
+
     @OneToOne(cascade = CascadeType.ALL)
     private Image image;
 

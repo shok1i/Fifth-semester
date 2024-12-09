@@ -50,6 +50,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/collection">Моя полка</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/order/list">Заказы</a>
+                    </li>
                 </ul>
 
                 <#if currentUser.userEmail??>

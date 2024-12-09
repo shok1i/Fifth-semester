@@ -58,6 +58,9 @@ public class User implements UserDetails {
     @ManyToMany(mappedBy = "liked_users")
     private List<Likes> likes = new ArrayList<>();
 
+    @OneToMany(mappedBy = "user")
+    private List<_Order> orders = new ArrayList<>();
+
     // Производим инициализацию
     @PrePersist
     private void init() {
