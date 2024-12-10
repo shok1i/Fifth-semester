@@ -31,7 +31,9 @@ public class UserService {
 
         // Натсройка пользовотеля по умолчанию
         user.setActive(true);
+
         user.getRoles().add(Role.ROLE_USER);
+
         user.setPassword(passwordEncoder.encode(user.getPassword()));
 
         UserCollection userCollection = new UserCollection();

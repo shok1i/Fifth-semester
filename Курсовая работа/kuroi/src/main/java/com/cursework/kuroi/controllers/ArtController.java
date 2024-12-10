@@ -7,6 +7,7 @@ import com.cursework.kuroi.repositories.UserRepository;
 import com.cursework.kuroi.services.ArtService;
 import com.cursework.kuroi.services.UserService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,6 +21,7 @@ import java.security.Principal;
 import java.time.LocalDate;
 import java.util.List;
 
+@Slf4j
 @Controller
 @RequiredArgsConstructor
 public class ArtController {
@@ -78,12 +80,13 @@ public class ArtController {
         model.addAttribute("author", userRepository.getUser_ByUserNickName(nickname));
 
         if (userRepository.getUser_ByUserNickName(nickname) != null) {
-            if (userRepository.getUser_ByUserNickName(nickname).getUserCollection().getCollections_arts().contains(art)) {
+            if (userService.getUserByPrinciple(principal).getUserCollection().getCollections_arts().contains(art)) {
                 model.addAttribute("isContain", true);
+                log.warn("isContain {}", true);
                 return "art-info";
             }
         }
-
+        log.warn("isContain {}", false);
         model.addAttribute("isContain", false);
         return "art-info";
     }

@@ -29,3 +29,7 @@ public class UserCollection {
     )
     private List<Art> collections_arts = new ArrayList<>();
 }
+
+
+
+

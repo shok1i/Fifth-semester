@@ -1,6 +1,7 @@
 <#import "blocks/template.ftlh" as t>
 <@t.template currentUser>
-    <div class="row justify-content-center">
+    <div class="container">
+        <div class="row justify-content-center">
         <div class="col-12 col-md-12 col-xl-8">
             <div class="container mt-4">
                 <div class="row justify-content-between mx-auto">
@@ -62,5 +63,6 @@
                 </div>
             </div>
         </div>
+    </div>
     </div>
 </@t.template>
