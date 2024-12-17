@@ -26,7 +26,7 @@
         <meta name="_csrf" content="${_csrf.token}">
     </head>
 
-    <body>
+<body>
 
     <nav class="navbar navbar-expand-md navbar-light mx-auto sticky-top shadow-sm h-auto" role="navigation" id="navbar"
          style="font-size: 1.2em; backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); background-color: rgba(255, 255, 255, 0.55);}">

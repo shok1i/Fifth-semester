@@ -45,7 +45,6 @@ public class UserController {
         return "account";
     }
 
-
     @GetMapping("/account/edit")
     public String accountEdit(Principal principal, Model model) {
         model.addAttribute("currentUser", userService.getUserByPrinciple(principal));
@@ -58,10 +57,6 @@ public class UserController {
         return userService.getUserByPrinciple(principal);
     }
 
-    // Обработка POST-запросов
-    // Todo:
-    //  Сделать так что бы после регистрации у нас был автоматический вход
-    //  Сделать возвращаемое значение метода addUser на Long|String и т.п. что бы ловить код ошибки при регистрации (такой никнейм уже есть такой емаил уже есть) ТОЖЕ САМОЕ СДЕЛАТЬ В ЛОГИНЕ
     @PostMapping("/registration")
     public String createUser(User user, Model model, HttpServletRequest request) {
         if (!userService.addUser(user)) {
